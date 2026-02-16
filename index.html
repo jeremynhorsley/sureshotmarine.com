@@ -1,49 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sure Shot Marine</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: auto;
-            padding: 40px;
-            line-height: 1.6;
-        }
-        h1 {
-            color: #0b3d59;
-        }
-        .button {
-            display: inline-block;
-            padding: 12px 20px;
-            background: #0b3d59;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sure Shot Marine | Electrical & Systems Diagnostics</title>
+  <meta name="description" content="Marine electrical and onboard systems diagnostics in the San Francisco Bay Area. Battery & charging evaluation, NMEA 2000 troubleshooting, power quality checks, and pre-purchase electrical inspections." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
+
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <h1>Sure Shot Marine</h1>
+          <p>Electrical & Systems Diagnostics</p>
+        </div>
+      </div>
 
-<h1>Sure Shot Marine</h1>
+      <nav aria-label="Site">
+        <a class="active" href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
 
-<p>Precision Marine Electrical & Systems Service in the San Francisco Bay Area.</p>
+    <main>
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="kicker"><span class="dot" aria-hidden="true"></span>San Francisco Bay Area</div>
+          <h2>Marine electrical and onboard systems diagnostics.</h2>
+          <p>
+            I help owners resolve electrical faults, charging issues, network problems, and other system-level concerns
+            using structured troubleshooting and clear documentation.
+          </p>
 
-<h2>Services</h2>
-<ul>
-<li>Advanced Electrical Diagnostics</li>
-<li>Battery & Charging Systems</li>
-<li>NMEA 2000 Installation & Troubleshooting</li>
-<li>Marine Power Quality Analysis</li>
-<li>Bilge & Safety Systems</li>
-</ul>
+          <div class="cta-row">
+            <!-- Replace with your preferred receiving email address -->
+            <a class="btn primary" href="mailto:info@sureshotmarine.com?subject=Service%20Request&body=Boat%20make%20%2F%20model%3A%0AMarina%20location%3A%0AIssue%20summary%3A%0APreferred%20contact%20number%3A%0A">Email to Request Service</a>
+            <a class="btn" href="services.html">View Services</a>
+          </div>
 
-<h2>About</h2>
-<p>Sure Shot Marine delivers high-level marine electrical diagnostics, troubleshooting, and systems consulting with an industrial engineering mindset.</p>
+          <div class="subnote">
+            Include boat make/model, marina location, brief issue summary, and a contact number.
+          </div>
+        </div>
+      </div>
 
-<p><a class="button" href="mailto:jeremynhorsley@gmail.com">Request Service</a></p>
+      <section>
+        <h3>Overview</h3>
+        <p style="margin:0;color:var(--muted);">
+          Sure Shot Marine provides electrical and onboard systems diagnostics for sail and power vessels in the San Francisco Bay Area.
+          I focus on identifying and resolving system issues using measured data and defined test procedures, with clear documentation and practical recommendations.
+        </p>
+      </section>
 
+      <section>
+        <h3>Common issues</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Charging problems <span class="pill">alternator / charger</span></h4>
+            <p>Inconsistent charge behavior, overheating, unexpected low voltage, or poor battery recovery.</p>
+          </div>
+          <div class="card">
+            <h4>Intermittent faults <span class="pill">hard to reproduce</span></h4>
+            <p>Random resets, nuisance alarms, breakers tripping, or unexplained shutdowns.</p>
+          </div>
+          <div class="card">
+            <h4>Parasitic draw <span class="pill">battery drain</span></h4>
+            <p>Unexplained drain while docked or at anchor, leading to dead batteries.</p>
+          </div>
+          <div class="card">
+            <h4>Network problems <span class="pill">NMEA 2000</span></h4>
+            <p>Dropouts, missing devices, data errors, or power feed issues to the backbone.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3>Scope</h3>
+        <p style="margin:0;color:var(--muted);">
+          I focus on electrical and onboard systems. Mechanical engine repair, fiberglass work, and cosmetic services are outside the current scope.
+          Staying specialized helps maintain technical accuracy and attention to detail.
+        </p>
+      </section>
+
+      <section>
+        <h3>Contact</h3>
+        <p style="margin:0 0 12px;color:var(--muted);">
+          For service inquiries, please include:
+        </p>
+        <ul class="clean" style="margin-top:0;">
+          <li>Vessel make and model</li>
+          <li>Marina location</li>
+          <li>Brief description of the concern</li>
+          <li>Preferred contact number</li>
+        </ul>
+
+        <div class="cta-row" style="margin-top:14px;">
+          <a class="btn primary" href="mailto:info@sureshotmarine.com?subject=Service%20Request&body=Boat%20make%20%2F%20model%3A%0AMarina%20location%3A%0AIssue%20summary%3A%0APreferred%20contact%20number%3A%0A">Email Sure Shot Marine</a>
+          <a class="btn" href="contact.html">Contact page</a>
+        </div>
+
+        <p class="subnote">
+          Email: <span class="mono">jeremynhorsley@gmail.com</span> (replace if different)
+        </p>
+      </section>
+
+      <footer>
+        <div>© <span id="year"></span> Sure Shot Marine</div>
+        <div class="mono">San Francisco Bay Area</div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
