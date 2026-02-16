@@ -407,3 +407,42 @@ footer::before{
 .mono{
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
 }
+/* -------- Credentials Strip -------- */
+
+.credentials{
+  border-top: 2px solid var(--navy);
+  border-bottom: 2px solid var(--red);
+  margin: 40px 0 60px;
+  background: #F8FAFC;
+}
+
+.credentials__inner{
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 18px 22px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  justify-content:space-between;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  color: var(--navy);
+}
+
+.credentials__inner span{
+  position:relative;
+  padding-left:16px;
+}
+
+.credentials__inner span::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:6px;
+  width:6px;
+  height:6px;
+  background: var(--red);
+}
+
