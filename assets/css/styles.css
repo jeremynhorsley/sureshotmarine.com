@@ -445,4 +445,19 @@ footer::before{
   height:6px;
   background: var(--red);
 }
+/* Header banner */
+.header-banner{
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.header-banner__img{
+  width: 100%;
+  height: 220px;       /* adjust to taste: 180–280 */
+  object-fit: cover;
+  display: block;
+}
 
