@@ -53,6 +53,9 @@ header{
   margin-bottom: 34px;
   border-bottom: 3px solid var(--navy);
   position:relative;
+
+  /* Force header to wrap so the banner drops under brand/nav */
+  flex-wrap: wrap;
 }
 
 /* Thin red accent below header rule */
@@ -68,11 +71,19 @@ header::after{
 
 .brand{
   display:flex;
-  align-items:flex-start;
+  align-items:center; /* was flex-start; center aligns mark with text */
   gap:14px;
 }
 
-/* Optional mark: clean “target box” */
+/* Minimal compass mark (inline SVG) */
+.brand-mark{
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  margin-top: 2px; /* small optical alignment */
+}
+
+/* Keep legacy .mark safe if any page still uses it */
 .mark{
   width: 34px;
   height: 34px;
@@ -138,6 +149,23 @@ nav a.active::after{
   width: 100%;
   height: 2px;
   background: var(--red);
+}
+
+/* Header banner (full width under brand/nav) */
+.header-banner{
+  flex: 0 0 100%;
+  width: 100%;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.header-banner__img{
+  width: 100%;
+  height: 240px;      /* adjust: 180–320 */
+  object-fit: cover;
+  display: block;
 }
 
 /* -------- Hero (clean, not cluttered) -------- */
@@ -325,8 +353,17 @@ section h3::after{
   .grid{ grid-template-columns: 1fr; }
   .wrap{ padding: 40px 16px 70px; }
   .hero-inner, .hero__inner{ padding: 28px 20px; }
+
+  /* Banner slightly shorter on mobile */
+  .header-banner__img{ height: 180px; }
+
+  /* Keep brand + nav stacking clean */
+  header{
+    align-items:flex-start;
+  }
 }
 
+/* Cards */
 .card{
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -407,8 +444,8 @@ footer::before{
 .mono{
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
 }
-/* -------- Credentials Strip -------- */
 
+/* -------- Credentials Strip -------- */
 .credentials{
   border-top: 2px solid var(--navy);
   border-bottom: 2px solid var(--red);
@@ -446,35 +483,27 @@ footer::before{
   background: var(--red);
 }
 
-
-
-/* Force header to wrap so the banner drops under brand/nav */
-header{
-  flex-wrap: wrap;
+/* If your About page uses a UL for credentials, keep it clean */
+.credentials-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
 }
 
-/* Make the banner take the full width under the top row */
-.header-banner{
-  flex: 0 0 100%;
-  width: 100%;
-  margin-top: 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
+.credentials-list li{
+  position:relative;
+  padding-left:16px;
 }
 
-.header-banner__img{
-  width: 100%;
-  height: 240px;      /* adjust: 180–320 */
-  object-fit: cover;
-  display: block;
+.credentials-list li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:7px;
+  width:6px;
+  height:6px;
+  background: var(--red);
 }
-
-.crest-logo{
-  width: 52px;       /* controlled size */
-  height: 52px;      /* force square */
-  object-fit: contain;
-  flex-shrink: 0;    /* prevents stretching */
-  margin-top: 2px;
-}
-
