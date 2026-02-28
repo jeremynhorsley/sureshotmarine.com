@@ -47,14 +47,14 @@ body::before{
 header{
   display:flex;
   justify-content:space-between;
-  align-items:flex-end;
+  align-items:center;          /* tighter, more intentional */
   gap:20px;
   padding: 18px 0 16px;
   margin-bottom: 34px;
   border-bottom: 3px solid var(--navy);
   position:relative;
 
-  /* Force header to wrap so the banner drops under brand/nav */
+  /* Banner drops under brand/nav */
   flex-wrap: wrap;
 }
 
@@ -71,34 +71,16 @@ header::after{
 
 .brand{
   display:flex;
-  align-items:center; /* was flex-start; center aligns mark with text */
-  gap:14px;
+  align-items:center;
+  gap:12px;
 }
 
 /* Minimal compass mark (inline SVG) */
 .brand-mark{
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   flex-shrink: 0;
-  margin-top: 2px; /* small optical alignment */
-}
-
-/* Keep legacy .mark safe if any page still uses it */
-.mark{
-  width: 34px;
-  height: 34px;
-  border: 2px solid var(--navy);
-  border-radius: 6px;
-  position:relative;
-  margin-top: 2px;
-}
-
-.mark::before{
-  content:"";
-  position:absolute;
-  inset:7px;
-  border: 2px solid var(--red);
-  border-radius: 4px;
+  margin-top: 0;
 }
 
 .brand h1{
@@ -107,6 +89,8 @@ header::after{
   font-weight: 800;
   letter-spacing: .4px;
   color: var(--navy);
+  line-height: 1.05;
+  white-space: nowrap; /* keep “Jeremyn Horsley” on one line */
 }
 
 .brand p{
@@ -114,6 +98,7 @@ header::after{
   font-size: 13px;
   color: var(--muted);
   letter-spacing:.2px;
+  max-width: 34ch;
 }
 
 /* Nav: compact, authoritative, clean */
@@ -155,15 +140,25 @@ nav a.active::after{
 .header-banner{
   flex: 0 0 100%;
   width: 100%;
-  margin-top: 16px;
+  margin-top: 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
+  position: relative;
+}
+
+/* Subtle integrated accent stripe on banner */
+.header-banner::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:3px;
+  background: linear-gradient(90deg, var(--navy) 0 70%, var(--red) 70% 100%);
 }
 
 .header-banner__img{
   width: 100%;
-  height: 240px;      /* adjust: 180–320 */
+  height: 180px;       /* reduced so you get to content faster */
   object-fit: cover;
   display: block;
 }
@@ -355,15 +350,18 @@ section h3::after{
   .hero-inner, .hero__inner{ padding: 28px 20px; }
 
   /* Banner slightly shorter on mobile */
-  .header-banner__img{ height: 180px; }
+  .header-banner__img{ height: 150px; }
 
-  /* Keep brand + nav stacking clean */
+  /* Let brand/nav stack naturally */
   header{
     align-items:flex-start;
   }
+
+  .brand h1{
+    white-space: normal; /* allow wrap on small screens */
+  }
 }
 
-/* Cards */
 .card{
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -483,7 +481,7 @@ footer::before{
   background: var(--red);
 }
 
-/* If your About page uses a UL for credentials, keep it clean */
+/* If About uses UL list for credentials */
 .credentials-list{
   list-style:none;
   margin:0;
@@ -496,6 +494,10 @@ footer::before{
 .credentials-list li{
   position:relative;
   padding-left:16px;
+  text-transform:uppercase;
+  font-weight:800;
+  letter-spacing:.6px;
+  color: var(--navy);
 }
 
 .credentials-list li::before{
