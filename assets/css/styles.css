@@ -470,3 +470,11 @@ header{
   display: block;
 }
 
+.crest-logo{
+  width: 52px;       /* controlled size */
+  height: 52px;      /* force square */
+  object-fit: contain;
+  flex-shrink: 0;    /* prevents stretching */
+  margin-top: 2px;
+}
+
