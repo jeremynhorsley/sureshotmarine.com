@@ -1,17 +1,24 @@
 :root{
-  --navy: #0C2340;     /* deep professional blue */
-  --red:  #B11226;     /* deep professional red */
-  --text: #1B1B1B;     /* dark readable text */
-  --muted:#566372;     /* secondary text */
-  --line: #D8DEE6;     /* borders */
+  --navy: #0C2340;
+  --red:  #B11226;
+  --text: #121417;
+  --muted:#586575;
+  --line: #D8DEE6;
   --white:#FFFFFF;
-  --bg:   #FFFFFF;     /* pure white background */
-  --radius: 8px;
+  --bg:   #FFFFFF;
+
+  --radius: 10px;
+  --radius-sm: 8px;
+
+  /* subtle depth */
+  --shadow-sm: 0 1px 0 rgba(12,35,64,.04), 0 8px 24px rgba(12,35,64,.06);
+  --shadow-card: 0 1px 0 rgba(12,35,64,.04), 0 10px 30px rgba(12,35,64,.08);
+
+  --max: 1040px;
 }
 
 /* -------- Base -------- */
 *{ box-sizing:border-box; }
-
 html, body{ height:100%; }
 
 body{
@@ -20,15 +27,15 @@ body{
   color: var(--text);
   line-height:1.7;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  text-rendering: geometricPrecision;
 }
 
 .wrap{
-  max-width: 1040px;
+  max-width: var(--max);
   margin: 0 auto;
-  padding: 56px 22px 80px;
+  padding: 52px 22px 80px;
 }
 
-/* -------- Subtle border graphics (not dark) -------- */
 /* Top equipment stripe */
 body::before{
   content:"";
@@ -43,22 +50,28 @@ body::before{
     );
 }
 
+/* Better default text sizing */
+p{ margin: 0 0 16px; }
+ul{ margin: 0; }
+
+/* Selection polish */
+::selection{
+  background: rgba(177,18,38,.12);
+}
+
 /* -------- Header -------- */
 header{
   display:flex;
   justify-content:space-between;
-  align-items:center;          /* tighter, more intentional */
+  align-items:center;
   gap:20px;
-  padding: 18px 0 16px;
-  margin-bottom: 34px;
+  padding: 18px 0 14px;
+  margin-bottom: 30px;
   border-bottom: 3px solid var(--navy);
   position:relative;
-
-  /* Banner drops under brand/nav */
   flex-wrap: wrap;
 }
 
-/* Thin red accent below header rule */
 header::after{
   content:"";
   position:absolute;
@@ -75,22 +88,50 @@ header::after{
   gap:12px;
 }
 
-/* Minimal compass mark (inline SVG) */
+/* SVG logo */
 .brand-mark{
   width: 30px;
   height: 30px;
   flex-shrink: 0;
-  margin-top: 0;
+}
+
+/* Fallback if any page still uses <div class="mark"> */
+.mark{
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 2.5px solid var(--navy);
+  position: relative;
+  flex-shrink: 0;
+}
+.mark::before,
+.mark::after{
+  content:"";
+  position:absolute;
+  inset: 7px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+}
+.mark::before{
+  border-top-color: var(--navy);
+  border-left-color: var(--navy);
+  transform: rotate(45deg);
+}
+.mark::after{
+  inset: 12px;
+  background: var(--red);
+  clip-path: polygon(50% 0, 66% 50%, 50% 100%, 34% 50%);
+  opacity: .95;
 }
 
 .brand h1{
   margin:0;
   font-size: 22px;
-  font-weight: 800;
-  letter-spacing: .4px;
+  font-weight: 850;
+  letter-spacing: .3px;
   color: var(--navy);
   line-height: 1.05;
-  white-space: nowrap; /* keep “Jeremyn Horsley” on one line */
+  white-space: nowrap;
 }
 
 .brand p{
@@ -101,7 +142,7 @@ header::after{
   max-width: 34ch;
 }
 
-/* Nav: compact, authoritative, clean */
+/* Nav */
 nav{
   display:flex;
   gap:22px;
@@ -114,7 +155,7 @@ nav a{
   text-decoration:none;
   color: var(--navy);
   font-size: 12.5px;
-  font-weight: 800;
+  font-weight: 850;
   letter-spacing: .9px;
   text-transform: uppercase;
   padding: 6px 0;
@@ -136,7 +177,7 @@ nav a.active::after{
   background: var(--red);
 }
 
-/* Header banner (full width under brand/nav) */
+/* Header banner */
 .header-banner{
   flex: 0 0 100%;
   width: 100%;
@@ -145,9 +186,9 @@ nav a.active::after{
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
+  box-shadow: var(--shadow-sm);
 }
 
-/* Subtle integrated accent stripe on banner */
 .header-banner::after{
   content:"";
   position:absolute;
@@ -158,25 +199,25 @@ nav a.active::after{
 
 .header-banner__img{
   width: 100%;
-  height: 180px;       /* reduced so you get to content faster */
+  height: 180px;
   object-fit: cover;
   display: block;
 }
 
-/* -------- Hero (clean, not cluttered) -------- */
+/* -------- Hero -------- */
 .hero{
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
-  margin: 18px 0 48px;
+  margin: 18px 0 44px;
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-inner,
 .hero__inner{
-  padding: 38px 34px;
+  padding: 36px 32px;
 }
 
-/* If your HTML uses .kicker + .dot from older versions, keep them simple */
 .kicker{
   font-size: 12px;
   text-transform: uppercase;
@@ -196,16 +237,6 @@ nav a.active::after{
   background: var(--red);
 }
 
-/* If your HTML uses .hero__eyebrow (newer), it will also work */
-.hero__eyebrow{
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1.4px;
-  color: var(--red);
-  font-weight: 900;
-  margin-bottom: 14px;
-}
-
 .hero h2,
 .hero__title{
   margin: 0 0 14px;
@@ -217,23 +248,22 @@ nav a.active::after{
 
 .hero p,
 .hero__lede{
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   font-size: 17px;
   color: var(--muted);
   max-width: 72ch;
 }
 
-/* CTA row */
 .cta-row,
 .hero__actions{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
   align-items:center;
-  margin: 8px 0 0;
+  margin: 10px 0 0;
 }
 
-/* Buttons: real buttons, not blue links */
+/* Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -244,19 +274,24 @@ nav a.active::after{
   letter-spacing: .9px;
   text-transform: uppercase;
   text-decoration:none;
-  border-radius: 6px;
+  border-radius: 7px;
   border: 2px solid var(--navy);
   color: var(--navy);
   background: var(--white);
   cursor:pointer;
+  transition: transform .08s ease, box-shadow .12s ease, border-color .12s ease, color .12s ease;
 }
 
 .btn:hover{
   border-color: var(--red);
   color: var(--red);
+  transform: translateY(-1px);
 }
 
-/* Handle both naming styles: .btn.primary (older) and .btn--primary (new) */
+.btn:active{
+  transform: translateY(0);
+}
+
 .btn.primary,
 .btn--primary{
   background: var(--navy);
@@ -272,11 +307,6 @@ nav a.active::after{
   border-color: var(--red);
 }
 
-.btn--secondary{
-  background: var(--white);
-}
-
-/* Helper text line under CTAs */
 .subnote,
 .hero__helper{
   margin-top: 14px;
@@ -287,28 +317,29 @@ nav a.active::after{
   max-width: 80ch;
 }
 
-/* -------- Sections (lots of white, light borders) -------- */
+/* -------- Sections -------- */
 section{
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
-  padding: 28px 26px;
-  margin-bottom: 26px;
+  padding: 26px 24px;
+  margin-bottom: 22px;
   position:relative;
+  box-shadow: var(--shadow-sm);
 }
 
-/* Navy structure + thin red accent spine */
+/* Navy structure + thin red accent spine (slightly slimmer) */
 section::before{
   content:"";
   position:absolute;
   left:-1px;
   top:-1px;
   bottom:-1px;
-  width: 6px;
+  width: 5px;
   background:
     linear-gradient(180deg, var(--navy), var(--navy)),
     linear-gradient(180deg, var(--red), var(--red));
-  background-size: 4px 100%, 2px 100%;
+  background-size: 3px 100%, 2px 100%;
   background-position: left, right;
   background-repeat:no-repeat;
   border-top-left-radius: var(--radius);
@@ -316,17 +347,16 @@ section::before{
 }
 
 section h3{
-  margin:0 0 18px;
+  margin:0 0 16px;
   font-size: 18px;
   font-weight: 900;
-  letter-spacing: .2px;
+  letter-spacing: .15px;
   color: var(--navy);
   padding-bottom: 10px;
   border-bottom: 1px solid var(--line);
   position:relative;
 }
 
-/* Thin red underline accent */
 section h3::after{
   content:"";
   position:absolute;
@@ -337,36 +367,29 @@ section h3::after{
   background: var(--red);
 }
 
+h4{ margin: 0 0 8px; }
+h2{ margin: 0 0 14px; color: var(--navy); }
+
 /* -------- Grid / Cards -------- */
 .grid{
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
-}
-
-@media (max-width: 860px){
-  .grid{ grid-template-columns: 1fr; }
-  .wrap{ padding: 40px 16px 70px; }
-  .hero-inner, .hero__inner{ padding: 28px 20px; }
-
-  /* Banner slightly shorter on mobile */
-  .header-banner__img{ height: 150px; }
-
-  /* Let brand/nav stack naturally */
-  header{
-    align-items:flex-start;
-  }
-
-  .brand h1{
-    white-space: normal; /* allow wrap on small screens */
-  }
+  gap: 18px;
 }
 
 .card{
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: var(--white);
   padding: 16px 16px;
+  box-shadow: none;
+  transition: transform .10s ease, box-shadow .16s ease, border-color .16s ease;
+}
+
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(12,35,64,.18);
 }
 
 .card h4{
@@ -382,7 +405,7 @@ section h3::after{
   color: var(--muted);
 }
 
-/* Pills (if present) */
+/* Pills */
 .pill{
   display:inline-block;
   font-size: 11px;
@@ -403,7 +426,6 @@ ul.clean{
   margin: 0;
   padding-left: 20px;
 }
-
 ul.clean li{
   margin-bottom: 10px;
   color: var(--muted);
@@ -413,6 +435,14 @@ ul.clean li{
 /* Links */
 a{ color: var(--navy); }
 a:hover{ color: var(--red); }
+
+/* Focus states (this is “premium” polish) */
+a:focus-visible,
+.btn:focus-visible{
+  outline: 3px solid rgba(177,18,38,.25);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
 
 /* Footer */
 footer{
@@ -443,69 +473,12 @@ footer::before{
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
 }
 
-/* -------- Credentials Strip -------- */
-.credentials{
-  border-top: 2px solid var(--navy);
-  border-bottom: 2px solid var(--red);
-  margin: 40px 0 60px;
-  background: #F8FAFC;
-}
-
-.credentials__inner{
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 18px 22px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:24px;
-  justify-content:space-between;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  color: var(--navy);
-}
-
-.credentials__inner span{
-  position:relative;
-  padding-left:16px;
-}
-
-.credentials__inner span::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:6px;
-  width:6px;
-  height:6px;
-  background: var(--red);
-}
-
-/* If About uses UL list for credentials */
-.credentials-list{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:flex;
-  flex-wrap:wrap;
-  gap:24px;
-}
-
-.credentials-list li{
-  position:relative;
-  padding-left:16px;
-  text-transform:uppercase;
-  font-weight:800;
-  letter-spacing:.6px;
-  color: var(--navy);
-}
-
-.credentials-list li::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:7px;
-  width:6px;
-  height:6px;
-  background: var(--red);
+/* Responsive */
+@media (max-width: 860px){
+  .grid{ grid-template-columns: 1fr; }
+  .wrap{ padding: 40px 16px 70px; }
+  .hero-inner, .hero__inner{ padding: 26px 18px; }
+  .header-banner__img{ height: 150px; }
+  header{ align-items:flex-start; }
+  .brand h1{ white-space: normal; }
 }
