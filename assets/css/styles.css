@@ -82,17 +82,26 @@ header::after{
   background: var(--red);
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* tighter spacing */
 }
 
 /* SVG logo */
-.brand-mark{
-  width: 30px;
-  height: 30px;
+.brand-mark {
+  width: 52px;   /* was likely ~40px */
+  height: 52px;
   flex-shrink: 0;
+}
+
+.brand h1 {
+  margin: 0;
+  line-height: 1.1;
+}
+
+.brand p {
+  margin: 4px 0 0 0;
 }
 
 /* Fallback if any page still uses <div class="mark"> */
