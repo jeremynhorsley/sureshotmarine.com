@@ -1,10 +1,16 @@
+```css
 /* ==========================================================================
    Sure Shot Marine — styles.css
    Cleaned + commented + mobile width fix
-   - Removes duplicate rules / double line-height
-   - Keeps compatibility with your existing HTML (hero-inner, mark, brand-mark)
-   - Fixes the “too narrow / boxed-in” look on phones by reducing section padding
+   - Keeps compatibility with your existing HTML:
+     * index.html uses: .brand-mark (SVG), .hero__inner, .hero__title, .hero__lede,
+       .hero__actions, .hero__helper
+     * services/about/contact use: .mark placeholder, .hero-inner (older), .cta-row
+   - IMPORTANT FIX:
+     * Prevents generic <section> styling (left accent stripe / padding) from affecting
+       the HERO section (<section class="hero">)
    ========================================================================== */
+
 
 /* =========================
    1) Design tokens (colors, spacing)
@@ -34,6 +40,7 @@
   --card-pad: 16px;
 }
 
+
 /* =========================
    2) Base / reset
    ========================= */
@@ -48,6 +55,7 @@ body{
   font: 17px/1.8 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Default paragraph rhythm (site-wide) */
 p{
   margin: 0 0 18px;
   letter-spacing: 0.01em;
@@ -57,6 +65,7 @@ p{
 a{ color: var(--navy); }
 a:hover{ color: var(--red); }
 
+
 /* =========================
    3) Page container
    ========================= */
@@ -65,6 +74,7 @@ a:hover{ color: var(--red); }
   margin: 0 auto;
   padding: var(--wrap-pad-top) var(--wrap-pad-x) var(--wrap-pad-bottom);
 }
+
 
 /* =========================
    4) Top stripe (brand accent)
@@ -82,6 +92,7 @@ body::before{
       transparent 14px 28px
     );
 }
+
 
 /* =========================
    5) Header
@@ -103,6 +114,7 @@ header{
   position: relative;
 }
 
+/* Thin red accent below header card */
 header::after{
   content: "";
   position: absolute;
@@ -120,7 +132,7 @@ header::after{
   gap: 12px;
 }
 
-/* Used on index.html (SVG) */
+/* Used on index.html (SVG logo mark) */
 .brand-mark{
   width: 44px;
   height: 44px;
@@ -128,8 +140,7 @@ header::after{
   display: block;
 }
 
-/* Used on services/about/contact.html (div.mark placeholder)
-   If you keep <div class="mark"></div>, this makes it look intentional. */
+/* Used on services/about/contact.html (div.mark placeholder) */
 .mark{
   width: 44px;
   height: 44px;
@@ -147,6 +158,7 @@ header::after{
   opacity: 0.9;
 }
 
+/* Name + tagline */
 .brand h1{
   margin: 0;
   font-size: 22px;
@@ -161,6 +173,7 @@ header::after{
   font-size: 13px;
   color: var(--muted);
 }
+
 
 /* =========================
    6) Navigation
@@ -198,8 +211,9 @@ nav a.active::after{
   background: var(--red);
 }
 
+
 /* =========================
-   7) Header banner (index.html)
+   7) Header banner (optional, index.html if used)
    ========================= */
 .header-banner{
   flex: 0 0 100%;
@@ -217,8 +231,14 @@ nav a.active::after{
   display: block;
 }
 
+
 /* =========================
-   8) Hero (services/about/contact)
+   8) Hero (index/services/about/contact)
+   NOTE:
+   - Your HTML uses BOTH naming styles:
+     * .hero-inner  (older)
+     * .hero__inner (newer/BEM)
+   - We support both.
    ========================= */
 .hero{
   border: 1px solid var(--line);
@@ -227,11 +247,13 @@ nav a.active::after{
   margin: 18px 0 48px;
 }
 
-.hero-inner{
+/* Padding wrapper inside the hero */
+.hero-inner,
+.hero__inner{
   padding: 38px 34px;
 }
 
-/* Eyebrow label ("Services" etc.) */
+/* Eyebrow label (kicker) */
 .kicker{
   display: inline-flex;
   align-items: center;
@@ -252,20 +274,45 @@ nav a.active::after{
   background: var(--red);
 }
 
-/* Hero title + body */
+/* Hero title:
+   - HTML may use .hero__title, but we also style .hero h2 directly */
 .hero h2{
   margin: 0 0 14px;
   font-size: clamp(30px, 4vw, 44px);
   line-height: 1.12;
   color: var(--navy);
 }
+.hero__title{ /* optional class support */
+  margin: 0 0 14px;
+}
 
-.hero p{
+/* Hero body text */
+.hero p,
+.hero__lede{
   margin: 0 0 22px;
   font-size: 17px;
   color: var(--muted);
   max-width: 72ch;
 }
+
+/* Hero action row (BEM) */
+.hero__actions{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Helper line under CTA row (BEM) */
+.hero__helper{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 80ch;
+}
+
 
 /* =========================
    9) Buttons / CTAs
@@ -274,6 +321,7 @@ nav a.active::after{
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .btn{
@@ -300,6 +348,7 @@ nav a.active::after{
   color: var(--red);
 }
 
+/* Primary button */
 .btn.primary{
   background: var(--navy);
   color: var(--white);
@@ -311,10 +360,14 @@ nav a.active::after{
   border-color: var(--red);
 }
 
+
 /* =========================
-   10) Content sections
+   10) Content sections (ALL sections EXCEPT the hero)
+   IMPORTANT FIX:
+   - Your hero is a <section class="hero">, so we EXCLUDE it here.
+   - This prevents the left accent stripe & section padding from affecting the hero.
    ========================= */
-section{
+section:not(.hero){
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
@@ -323,8 +376,8 @@ section{
   position: relative;
 }
 
-/* Left accent stripe */
-section::before{
+/* Left accent stripe (NOT on hero) */
+section:not(.hero)::before{
   content: "";
   position: absolute;
   left: -1px;
@@ -343,11 +396,9 @@ section::before{
   border-bottom-left-radius: var(--radius);
 }
 
-/* Section headings
-   - index.html uses <h2> inside <section>
-   - other sections use <h3> */
-section h2,
-section h3{
+/* Section headings (NOT on hero) */
+section:not(.hero) h2,
+section:not(.hero) h3{
   margin: 0 0 18px;
   color: var(--navy);
   font-weight: 800;
@@ -357,8 +408,9 @@ section h3{
   border-bottom: 1px solid var(--line);
 }
 
-section h2{ font-size: 22px; }
-section h3{ font-size: 18px; }
+section:not(.hero) h2{ font-size: 22px; }
+section:not(.hero) h3{ font-size: 18px; }
+
 
 /* =========================
    11) Grid + cards
@@ -407,6 +459,7 @@ section h3{ font-size: 18px; }
   background: #F7F9FB;
 }
 
+
 /* =========================
    12) Lists
    ========================= */
@@ -419,6 +472,7 @@ ul.clean li{
   margin-bottom: 10px;
   color: var(--muted);
 }
+
 
 /* =========================
    13) Footer
@@ -436,6 +490,7 @@ footer{
   flex-wrap: wrap;
   gap: 10px;
 }
+
 
 /* =========================
    14) Utilities (optional)
@@ -461,6 +516,7 @@ footer{
   color: var(--muted);
 }
 
+
 /* =========================
    15) Responsive / mobile fixes
    ========================= */
@@ -481,7 +537,8 @@ footer{
   }
 
   /* Hero padding tighter on phones */
-  .hero-inner{
+  .hero-inner,
+  .hero__inner{
     padding: 28px 20px;
   }
 
@@ -491,12 +548,13 @@ footer{
   }
 
   /* KEY FIX: sections felt narrow due to large padding + wrap padding */
-  section{
+  section:not(.hero){
     padding: 22px 18px; /* was 28px 26px */
   }
 
   /* Slightly reduce left stripe width so it steals less “visual width” */
-  section::before{
+  section:not(.hero)::before{
     width: 5px; /* was 6px */
   }
 }
+```
