@@ -12,32 +12,134 @@ content="Marine electrical troubleshooting and repair for sailboats and powerboa
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Electrician",
-  "name": "Jeremyn Horsley",
-  "alternateName": "Sure Shot Marine",
-  "url": "https://sureshotmarine.com",
-  "description": "Marine electrical diagnostics and troubleshooting for sailboats and powerboats in the San Francisco Bay Area.",
-  "areaServed": {
-    "@type": "Place",
-    "name": "San Francisco Bay Area"
-  },
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Alameda",
-    "addressRegion": "CA",
-    "addressCountry": "US"
-  },
-  "telephone": "+1-503-791-4685",
-  "sameAs": [
-    "https://www.linkedin.com/in/jeremynhorsley/"
-  ],
-  "serviceType": [
-    "Marine electrical diagnostics",
-    "Boat electrical troubleshooting",
-    "Battery charging systems",
-    "NMEA 2000 troubleshooting",
-    "Marine solar systems",
-    "Shore power troubleshooting"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://sureshotmarine.com/#person",
+      "name": "Jeremyn Horsley",
+      "url": "https://sureshotmarine.com",
+      "jobTitle": "Marine Electrical Technician",
+      "image": "https://sureshotmarine.com/assets/images/jeremyn-horsley.jpg",
+      "sameAs": [
+        "https://www.linkedin.com/in/jeremynhorsley/"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://sureshotmarine.com/#business",
+      "name": "Jeremyn Horsley – Marine Electrical & Systems Diagnostics",
+      "alternateName": "Sure Shot Marine",
+      "url": "https://sureshotmarine.com",
+      "telephone": "+1-503-791-4685",
+      "email": "jeremyn@sureshotmarine.com",
+      "image": "https://sureshotmarine.com/assets/images/ericson-banner.jpg",
+      "logo": "https://sureshotmarine.com/assets/images/HME-logo.png",
+      "priceRange": "$$",
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "San Francisco Bay Area"
+        },
+        {
+          "@type": "City",
+          "name": "Alameda, CA"
+        },
+        {
+          "@type": "City",
+          "name": "Oakland, CA"
+        },
+        {
+          "@type": "City",
+          "name": "Berkeley, CA"
+        },
+        {
+          "@type": "City",
+          "name": "Richmond, CA"
+        },
+        {
+          "@type": "City",
+          "name": "Sausalito, CA"
+        },
+        {
+          "@type": "City",
+          "name": "San Francisco, CA"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Alameda",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "founder": {
+        "@id": "https://sureshotmarine.com/#person"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/jeremynhorsley/"
+      ],
+      "knowsAbout": [
+        "Marine electrical troubleshooting",
+        "Battery charging systems",
+        "Shore power troubleshooting",
+        "Inverters",
+        "NMEA 2000 troubleshooting",
+        "Voltage drop testing",
+        "Marine solar design"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "name": "Marine Electrical Diagnostics",
+          "category": "Service",
+          "areaServed": "San Francisco Bay Area"
+        },
+        {
+          "@type": "Offer",
+          "name": "NMEA 2000 Troubleshooting",
+          "category": "Service",
+          "areaServed": "San Francisco Bay Area"
+        },
+        {
+          "@type": "Offer",
+          "name": "Shore Power / Inverter Troubleshooting",
+          "category": "Service",
+          "areaServed": "San Francisco Bay Area"
+        },
+        {
+          "@type": "Offer",
+          "name": "Electrical System Mapping",
+          "category": "Service",
+          "areaServed": "San Francisco Bay Area"
+        },
+        {
+          "@type": "Offer",
+          "name": "Solar Design & Upgrades",
+          "category": "Service",
+          "areaServed": "San Francisco Bay Area"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://sureshotmarine.com/#website",
+      "url": "https://sureshotmarine.com",
+      "name": "Sure Shot Marine",
+      "publisher": {
+        "@id": "https://sureshotmarine.com/#business"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://sureshotmarine.com/#webpage",
+      "url": "https://sureshotmarine.com/",
+      "name": "Marine Electrician | Jeremyn Horsley | San Francisco Bay Area",
+      "isPartOf": {
+        "@id": "https://sureshotmarine.com/#website"
+      },
+      "about": {
+        "@id": "https://sureshotmarine.com/#business"
+      }
+    }
   ]
 }
 </script>
