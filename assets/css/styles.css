@@ -621,3 +621,25 @@ footer{
   monospace;
 
 }
+
+.signature{
+  margin-top:36px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+
+.signature{
+  margin-top:36px;
+  margin-bottom:10px;
+}
+
+.signature-name{
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+
+.signature-meta{
+  font-size:14px;
+  color:var(--muted);
+}
