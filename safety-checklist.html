@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vessel Survival Gear Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1a2f45;
+    --navy-light: #243d56;
+    --red: #c0392b;
+    --amber: #e67e22;
+    --amber-light: #f39c12;
+    --white: #f0eee8;
+    --gray: #8a9ba8;
+    --green: #27ae60;
+    --border: rgba(240,238,232,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy-mid);
+    border-bottom: 3px solid var(--red);
+    padding: 20px 24px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .vessel-title h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .vessel-title .sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .progress-block {
+    text-align: right;
+  }
+
+  .progress-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .progress-bar-wrap {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    height: 8px;
+    width: 180px;
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    background: var(--green);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .progress-count {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-top: 4px;
+  }
+
+  /* RESET */
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn:hover { border-color: var(--amber); color: var(--amber); }
+  .btn.danger:hover { border-color: var(--red); color: var(--red); }
+
+  /* MAIN */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 16px 60px;
+  }
+
+  /* CATEGORY */
+  .category {
+    margin-bottom: 6px;
+    border: 1px solid var(--border);
+    background: var(--navy-mid);
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .category-header:hover { background: var(--navy-light); }
+
+  .cat-icon {
+    font-size: 1.4rem;
+    width: 32px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .cat-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex: 1;
+  }
+
+  .cat-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .cat-tally {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+  }
+
+  .cat-tally .done { color: var(--green); font-weight: 700; }
+
+  .chevron {
+    color: var(--gray);
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+  }
+
+  .category.open .chevron { transform: rotate(90deg); }
+
+  .category-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .category.open .category-body { display: block; }
+
+  /* GEAR ITEM */
+  .gear-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .gear-item:last-child { border-bottom: none; }
+
+  .gear-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 18px 13px 32px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+
+  .gear-row:hover { background: rgba(255,255,255,0.03); }
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--gray);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .gear-item.checked .checkbox {
+    border-color: var(--green);
+    background: var(--green);
+  }
+
+  .check-mark {
+    display: none;
+    color: var(--navy);
+    font-size: 0.7rem;
+    font-weight: 900;
+  }
+
+  .gear-item.checked .check-mark { display: block; }
+
+  .gear-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    flex: 1;
+    transition: color 0.15s;
+  }
+
+  .gear-item.checked .gear-name {
+    color: var(--gray);
+    text-decoration: line-through;
+    text-decoration-color: var(--green);
+  }
+
+  .expand-checks {
+    font-size: 0.65rem;
+    color: var(--amber);
+    letter-spacing: 0.12em;
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid rgba(230,126,34,0.3);
+    cursor: pointer;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+
+  .expand-checks:hover { background: rgba(230,126,34,0.1); }
+
+  /* SUB-CHECKS */
+  .sub-checks {
+    display: none;
+    padding: 0 18px 14px 68px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .sub-checks.open { display: block; }
+
+  .sub-checks-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-top: 2px;
+  }
+
+  .sub-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px 0;
+    cursor: pointer;
+  }
+
+  .sub-check {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid rgba(138,155,168,0.5);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.12s;
+  }
+
+  .sub-item.checked .sub-check {
+    border-color: var(--amber-light);
+    background: var(--amber-light);
+  }
+
+  .sub-check-mark {
+    display: none;
+    color: var(--navy);
+    font-size: 0.55rem;
+  }
+
+  .sub-item.checked .sub-check-mark { display: block; }
+
+  .sub-text {
+    font-size: 0.85rem;
+    color: var(--gray);
+    line-height: 1.4;
+    transition: color 0.12s;
+  }
+
+  .sub-item.checked .sub-text {
+    color: rgba(138,155,168,0.5);
+    text-decoration: line-through;
+  }
+
+  /* PRIORITY BADGE */
+  .priority {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid;
+    flex-shrink: 0;
+  }
+
+  .priority.critical { color: var(--red); border-color: var(--red); }
+  .priority.required { color: var(--amber); border-color: var(--amber); }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 16px;
+    padding: 0 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .leg-dot {
+    width: 10px; height: 10px;
+    border: 1px solid;
+  }
+
+  .leg-dot.critical { border-color: var(--red); background: rgba(192,57,43,0.2); }
+  .leg-dot.required { border-color: var(--amber); background: rgba(230,126,34,0.2); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="vessel-title">
+      <div class="sub">Sure Shot Marine · Safety Inspection</div>
+      <h1>Survival Gear Checklist</h1>
+    </div>
+    <div class="progress-block">
+      <div class="progress-label">Gear Verified</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+      <div class="progress-count" id="progressCount">0 / 0</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn" onclick="expandAll()">Expand All</button>
+    <button class="btn" onclick="collapseAll()">Collapse All</button>
+    <button class="btn danger" onclick="resetAll()">Reset Checks</button>
+  </div>
+</header>
+
+<main>
+  <div class="legend">
+    <div class="legend-item"><div class="leg-dot critical"></div>USCG Required</div>
+    <div class="legend-item"><div class="leg-dot required"></div>Strongly Recommended</div>
+  </div>
+  <div id="checklist"></div>
+</main>
+
+<script>
+const data = [
+  {
+    icon: "🆘",
+    name: "Personal Flotation Devices (PFDs)",
+    items: [
+      {
+        name: "Type I/II/III Life Jackets — one per person aboard",
+        priority: "critical",
+        checks: [
+          "Correct count for current crew number",
+          "USCG-approved label visible and legible",
+          "No rips, tears, or deteriorated foam",
+          "Straps, buckles, and zippers functional",
+          "Automatically inflating PFDs: check inflator cartridge date and green armed indicator",
+          "Inflatable bladder holds air — oral inflate and check overnight if due",
+          "Stored accessible, not buried under gear",
+          "Crew can don in under 60 seconds"
+        ]
+      },
+      {
+        name: "Type IV Throwable Device (ring buoy or cushion)",
+        priority: "critical",
+        checks: [
+          "USCG-approved label present",
+          "No significant deterioration or waterlogging",
+          "Ring buoy: attached line is full length (~100 ft), no rot or kinks",
+          "Mounted in immediately accessible location, not stowed",
+          "Can be thrown to a person in the water without fouling"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "🔥",
+    name: "Visual Distress Signals (VDS)",
+    items: [
+      {
+        name: "Pyrotechnic Flares (3 day / 3 night minimum)",
+        priority: "critical",
+        checks: [
+          "Expiration dates current — flares expire 42 months from manufacture",
+          "Minimum 3 USCG-approved day signals and 3 night signals (or combination flares)",
+          "Stored in waterproof container, away from heat",
+          "Crew knows how to deploy — top away from face, downwind",
+          "Expired flares retained as backups but not counted toward legal minimum"
+        ]
+      },
+      {
+        name: "Non-Pyrotechnic Signals (flag / light)",
+        priority: "required",
+        checks: [
+          "Orange distress flag (3' x 3' minimum): no fading, grommets intact",
+          "SOS electric distress light: battery charge tested, waterproof housing intact",
+          "Electric light: flash pattern verified as SOS (not steady)"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "🔔",
+    name: "Sound Producing Devices",
+    items: [
+      {
+        name: "Horn or Whistle",
+        priority: "critical",
+        checks: [
+          "Audible signal device aboard — air horn or athletic whistle at minimum",
+          "Air horn: canister not empty, actuator not corroded",
+          "Whistle: attached to each PFD for man-overboard use",
+          "Foghorn: tested before departure in restricted visibility conditions"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "⚓",
+    name: "Fire Extinguishers",
+    items: [
+      {
+        name: "Marine-rated B-I or B-II extinguisher(s)",
+        priority: "critical",
+        checks: [
+          "Correct count for vessel length (1× B-I for <26 ft; 2× B-I or 1× B-II for 26–40 ft)",
+          "Pressure gauge needle in green zone",
+          "Pull pin in place and tamper seal intact",
+          "No visible corrosion, dents, or discharge nozzle blockage",
+          "Mounted in accessible bracket — not buried",
+          "Inspection date tag current (annual professional inspection recommended)",
+          "Crew knows location and pull-aim-squeeze operation"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "📡",
+    name: "Emergency Position Indicating Radio Beacon (EPIRB)",
+    items: [
+      {
+        name: "Category I or II 406 MHz EPIRB",
+        priority: "required",
+        checks: [
+          "Registered with NOAA — registration current (5-year renewal)",
+          "Battery expiration date not exceeded",
+          "Self-test passed — activation light blinks correctly",
+          "Hydrostatic release mechanism: not corroded, date current (replace every 2 years)",
+          "Category I: float-free bracket mounted properly, not obstructed",
+          "Category II: stored accessible for manual activation",
+          "GPS-enabled unit: satellite fix light functional"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "📻",
+    name: "VHF Radio",
+    items: [
+      {
+        name: "Fixed-mount VHF with DSC",
+        priority: "critical",
+        checks: [
+          "MMSI number programmed and registered with FCC/BoatUS",
+          "DSC distress button operational — cover in place",
+          "Receives weather broadcasts on WX channels",
+          "Antenna connection tight, no corrosion at deck connector",
+          "Transmit power confirmed (25W / 1W switch functional)",
+          "GPS feed to radio operational for DSC position reports",
+          "Hailer/foghorn function operational if equipped"
+        ]
+      },
+      {
+        name: "Handheld VHF (backup)",
+        priority: "required",
+        checks: [
+          "Battery fully charged before departure",
+          "Spare charged battery or AA adapter aboard",
+          "Waterproof rating intact — no cracked housing",
+          "Channel 16 monitor confirmed",
+          "Stored in accessible grab bag or nav station"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "🛟",
+    name: "Life Raft / Dinghy",
+    items: [
+      {
+        name: "Offshore Life Raft or Coastal Equivalent",
+        priority: "required",
+        checks: [
+          "Certification/service current — inspect every 1–3 years per manufacturer",
+          "Hydrostatic release mechanism: date current, installed correctly",
+          "Painter line connected to vessel strongpoint",
+          "Container undamaged — no corrosion on valise or canister",
+          "Capacity rating meets current crew count",
+          "Interior kit: water, rations, first aid, bailer, sea anchor, signaling mirror",
+          "Crew briefed on inflation: pull painter, tug hard to fire CO₂"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "🧰",
+    name: "Abandon Ship / Grab Bag",
+    items: [
+      {
+        name: "Abandon Ship Bag — ready to deploy",
+        priority: "required",
+        checks: [
+          "Bright color, floats, attached to a tether point",
+          "Contents: handheld VHF, EPIRB or PLB, flares, water, rations (3-day)",
+          "Knife, signal mirror, whistle, flashlight with fresh batteries",
+          "First aid kit — medications current, no expired items",
+          "Ship's documents, passports, cash in waterproof pouch",
+          "Reviewed and repacked within last 12 months"
+        ]
+      },
+      {
+        name: "Personal Locator Beacons (PLBs)",
+        priority: "required",
+        checks: [
+          "One per crew member for offshore passages — registered with NOAA",
+          "Battery expiration date current",
+          "Self-test passes",
+          "Stored in grab bag or clipped to PFD"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "💊",
+    name: "First Aid Kit",
+    items: [
+      {
+        name: "Marine First Aid Kit",
+        priority: "required",
+        checks: [
+          "No expired medications — check all dates",
+          "Bleeding control: tourniquets, hemostatic gauze, pressure bandages",
+          "Wound care: sutures or closure strips, antiseptic, irrigation syringe",
+          "Burns: hydrogel dressings current",
+          "Prescription meds aboard for crew's known conditions",
+          "Seasickness medication (Meclizine/Scopolamine patches)",
+          "First aid manual included",
+          "Waterproof container intact"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "💡",
+    name: "Navigation Lights",
+    items: [
+      {
+        name: "Running Lights and Anchor Light",
+        priority: "critical",
+        checks: [
+          "Port (red), starboard (green), stern (white) lights operational",
+          "Masthead tricolor (if used at sea): verified functional",
+          "Anchor light: tested — 360° white visible",
+          "All lenses clean, no crazing or UV damage",
+          "Spare bulbs or LED replacements aboard",
+          "Wiring connections tight at fixtures — no corrosion"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "⚙️",
+    name: "Bilge Pump",
+    items: [
+      {
+        name: "Electric and Manual Bilge Pump",
+        priority: "critical",
+        checks: [
+          "Electric pump: activates on auto float switch — test manually",
+          "Float switch height set correctly — not too high, not bypassing hose exit",
+          "Discharge thru-hull: seacock operational, not corroded shut",
+          "Manual pump: handle aboard and operational — can move 10+ gal/min",
+          "Bilge clean — no oil, debris fouling float switch",
+          "Strainer clean on electric pump intake",
+          "High-water alarm functional if installed"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "🔑",
+    name: "Seacocks and Thru-Hull Fittings",
+    items: [
+      {
+        name: "All Below-Waterline Seacocks",
+        priority: "critical",
+        checks: [
+          "All seacocks exercised — open and close fully, not seized",
+          "No weeping or drips at packing or hose connections",
+          "Tapered wooden plug wired to each seacock for emergency use",
+          "Hose clamps: two per connection, both tight, no rust",
+          "Engine raw water intake: strainer clean, seacock operational",
+          "Head intake and discharge: valves operational",
+          "Crew knows location of every seacock aboard"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "⚡",
+    name: "Electrical Safety",
+    items: [
+      {
+        name: "Shore Power & Galvanic Protection",
+        priority: "required",
+        checks: [
+          "Galvanic isolator or isolation transformer in shore power circuit",
+          "Galvanic isolator: continuity test, no corrosion on housing",
+          "Shore power cord: no cracked insulation, pins not burned",
+          "ELCI breaker at main panel — tested via test button",
+          "No AC-to-DC ground bond (engine block must not be bonded to AC neutral/ground)",
+          "Zincs: hull, shaft, rudder — check for >50% consumption, replace if needed"
+        ]
+      }
+    ]
+  },
+  {
+    icon: "🧭",
+    name: "Navigation & Safety Equipment",
+    items: [
+      {
+        name: "Compass and Charts",
+        priority: "required",
+        checks: [
+          "Magnetic compass: bubble-free, deviation card posted",
+          "Paper charts or official electronic charts for operating area",
+          "GPS chartplotter: waypoints loaded, software current",
+          "Radar reflector mounted if operating in commercial traffic",
+          "Anchor and rode appropriate for operating depth and holding ground",
+          "Jacklines and tethers: stitching intact, snaps functional"
+        ]
+      },
+      {
+        name: "Man Overboard Equipment",
+        priority: "critical",
+        checks: [
+          "Horseshoe buoy with light and drogue: mounted accessible in cockpit",
+          "MOB pole with flag — deploys without fouling",
+          "Throw rope or heaving line: bag is ready, line isn't tangled",
+          "Crew practiced MOB drill — skipper wheel-to-the-rescue or quick stop",
+          "MOB button on chartplotter works — tested"
+        ]
+      }
+    ]
+  }
+];
+
+// Build DOM
+const container = document.getElementById('checklist');
+let totalGear = 0;
+let checkedGear = 0;
+
+data.forEach((cat, ci) => {
+  const catEl = document.createElement('div');
+  catEl.className = 'category';
+  catEl.id = `cat-${ci}`;
+
+  const tallyId = `tally-${ci}`;
+  const catCount = cat.items.length;
+  totalGear += catCount;
+
+  catEl.innerHTML = `
+    <div class="category-header" onclick="toggleCat(${ci})">
+      <span class="cat-icon">${cat.icon}</span>
+      <span class="cat-name">${cat.name}</span>
+      <div class="cat-meta">
+        <span class="cat-tally" id="${tallyId}"><span class="done">0</span> / ${catCount}</span>
+        <span class="chevron">▶</span>
+      </div>
+    </div>
+    <div class="category-body">
+      ${cat.items.map((item, ii) => buildItem(item, ci, ii)).join('')}
+    </div>
+  `;
+
+  container.appendChild(catEl);
+});
+
+updateProgress();
+
+function buildItem(item, ci, ii) {
+  const pid = `p-${ci}-${ii}`;
+  const badge = item.priority === 'critical'
+    ? `<span class="priority critical">USCG Req</span>`
+    : `<span class="priority required">Recommended</span>`;
+
+  const subItems = item.checks.map((c, si) => `
+    <div class="sub-item" id="sub-${ci}-${ii}-${si}" onclick="toggleSub(${ci},${ii},${si})">
+      <div class="sub-check"><span class="sub-check-mark">✓</span></div>
+      <span class="sub-text">${c}</span>
+    </div>
+  `).join('');
+
+  return `
+    <div class="gear-item" id="${pid}">
+      <div class="gear-row" onclick="toggleGear(${ci},${ii})">
+        <div class="checkbox"><span class="check-mark">✓</span></div>
+        <span class="gear-name">${item.name}</span>
+        ${badge}
+        <span class="expand-checks" onclick="event.stopPropagation(); toggleSubs(${ci},${ii})">Inspect ▾</span>
+      </div>
+      <div class="sub-checks" id="subs-${ci}-${ii}">
+        <div class="sub-checks-title">Inspection Points</div>
+        ${subItems}
+      </div>
+    </div>
+  `;
+}
+
+function toggleCat(ci) {
+  document.getElementById(`cat-${ci}`).classList.toggle('open');
+}
+
+function toggleGear(ci, ii) {
+  const el = document.getElementById(`p-${ci}-${ii}`);
+  const wasChecked = el.classList.contains('checked');
+  el.classList.toggle('checked');
+  if (!wasChecked) checkedGear++;
+  else checkedGear--;
+  updateCatTally(ci);
+  updateProgress();
+}
+
+function toggleSub(ci, ii, si) {
+  document.getElementById(`sub-${ci}-${ii}-${si}`).classList.toggle('checked');
+}
+
+function toggleSubs(ci, ii) {
+  const subs = document.getElementById(`subs-${ci}-${ii}`);
+  subs.classList.toggle('open');
+}
+
+function updateCatTally(ci) {
+  const cat = data[ci];
+  let done = 0;
+  cat.items.forEach((_, ii) => {
+    if (document.getElementById(`p-${ci}-${ii}`).classList.contains('checked')) done++;
+  });
+  const tally = document.getElementById(`tally-${ci}`);
+  tally.innerHTML = `<span class="done">${done}</span> / ${cat.items.length}`;
+}
+
+function updateProgress() {
+  let done = 0;
+  data.forEach((cat, ci) => {
+    cat.items.forEach((_, ii) => {
+      if (document.getElementById(`p-${ci}-${ii}`)?.classList.contains('checked')) done++;
+    });
+  });
+  checkedGear = done;
+  const pct = totalGear > 0 ? (done / totalGear) * 100 : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = `${done} / ${totalGear}`;
+  const bar = document.getElementById('progressBar');
+  if (pct === 100) bar.style.background = '#27ae60';
+  else if (pct > 60) bar.style.background = '#f39c12';
+  else bar.style.background = '#c0392b';
+}
+
+function expandAll() {
+  data.forEach((_, ci) => document.getElementById(`cat-${ci}`).classList.add('open'));
+}
+
+function collapseAll() {
+  data.forEach((_, ci) => document.getElementById(`cat-${ci}`).classList.remove('open'));
+}
+
+function resetAll() {
+  if (!confirm('Reset all checks?')) return;
+  data.forEach((cat, ci) => {
+    cat.items.forEach((item, ii) => {
+      document.getElementById(`p-${ci}-${ii}`).classList.remove('checked');
+      item.checks.forEach((_, si) => {
+        document.getElementById(`sub-${ci}-${ii}-${si}`)?.classList.remove('checked');
+      });
+      document.getElementById(`subs-${ci}-${ii}`).classList.remove('open');
+    });
+    updateCatTally(ci);
+  });
+  updateProgress();
+}
+</script>
+</body>
+</html>
