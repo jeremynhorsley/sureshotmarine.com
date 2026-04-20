@@ -424,34 +424,34 @@ main section[data-color="navy"] .contact-value { color: var(--cream); }
 main section[data-color="navy"] .contact-value a { color: var(--cream); border-bottom-color: rgba(196,168,74,0.35); }
 main section[data-color="navy"] .contact-value a:hover { color: var(--brass-light); border-bottom-color: var(--brass-light); }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 720px) {
-  header { padding: 1rem 1.25rem; gap: 0.75rem; }
-  .brand h1 { font-size: 1.05rem; }
-  .brand p { display: none; }
-  nav[aria-label="Site"] { gap: 0.8rem; }
-  nav[aria-label="Site"] a { font-size: 0.7rem; }
-  .hero { padding: 2.5rem 1.25rem; }
-  .hero__title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
-  main section { padding: 2rem 1.25rem; }
-  .grid { grid-template-columns: 1fr; }
-  footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; }
-}
-@media (max-width: 480px) {
-  .btn, a.btn { width: 100%; text-align: center; justify-content: center; }
-  .hero__actions, .cta-row { flex-direction: column; }
-}
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  nav {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+   /* ── RESPONSIVE ── */
+   @media (max-width: 720px) {
+     header {
+       flex-direction: column;
+       align-items: flex-start;
+       padding: 1rem 1.25rem;
+       gap: 0.75rem;
+     }
+     .brand h1 { font-size: 1.05rem; }
+     .brand p { display: none; }
+   
+     nav[aria-label="Site"] {
+       width: 100%;
+       display: flex;
+       flex-wrap: wrap;
+       gap: 0.5rem 1rem;
+     }
+     nav[aria-label="Site"] a { font-size: 0.7rem; }
+   
+     .hero { padding: 2.5rem 1.25rem; }
+     .hero__title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+     main section { padding: 2rem 1.25rem; }
+     .grid { grid-template-columns: 1fr; }
+     footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; }
+   }
+   
+   @media (max-width: 480px) {
+     .btn, a.btn { width: 100%; text-align: center; justify-content: center; }
+     .hero__actions, .cta-row { flex-direction: column; }
+   }
 }
