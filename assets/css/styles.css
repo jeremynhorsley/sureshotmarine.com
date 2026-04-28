@@ -424,6 +424,11 @@ main section[data-color="navy"] .contact-value { color: var(--cream); }
 main section[data-color="navy"] .contact-value a { color: var(--cream); border-bottom-color: rgba(196,168,74,0.35); }
 main section[data-color="navy"] .contact-value a:hover { color: var(--brass-light); border-bottom-color: var(--brass-light); }
 
+/* ── PROSE SECTION (centered single-column text) ── */
+.prose {
+  max-width: 62ch;
+  margin: 0 auto;
+}
    /* ── RESPONSIVE ── */
    @media (max-width: 720px) {
      header {
