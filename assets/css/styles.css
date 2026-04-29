@@ -429,6 +429,16 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
   max-width: 62ch;
   margin: 0 auto;
 }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 1rem;
+}
    /* ── RESPONSIVE ── */
    @media (max-width: 720px) {
      header {
