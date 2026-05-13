@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power System Sizing Calculator — Sure Shot Marine</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;font-size:14px;background:#f5f3ef;color:#1a1a2e;min-height:100vh}
+.hdr{background:#0d1b2a;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;letter-spacing:.04em;text-decoration:none}
+.logo span{color:#c0392b}
+.logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:#8a9bb0;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.hdr-badge{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:#c0392b;color:#fff;padding:4px 10px;border-radius:2px}
+.back-link{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a9bb0;text-decoration:none;border:0.5px solid #2a3f55;padding:4px 10px;border-radius:2px;transition:color .15s,border-color .15s}
+.back-link:hover{color:#e8dcc8;border-color:#4a6080}
+.title-bar{background:#c0392b;padding:.625rem 2rem;display:flex;align-items:baseline;gap:12px}
+.title-bar h1{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:.04em}
+.title-bar .sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.06em;text-transform:uppercase}
+.wrapper{max-width:1100px;margin:0 auto;padding:1.5rem 2rem}
+.intro{background:#fff;border:0.5px solid #d4cfc6;border-left:3px solid #c0392b;border-radius:2px;padding:.875rem 1.25rem;margin-bottom:1.5rem;font-size:13px;color:#4a5568;line-height:1.6}
+.intro strong{color:#1a1a2e}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.panel{background:#fff;border:0.5px solid #d4cfc6;border-radius:2px;padding:1.25rem}
+.sec-head{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8a9bb0;border-bottom:1px solid #c0392b;padding-bottom:3px;margin-bottom:.875rem}
+.subsec{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#c0392b;margin:.875rem 0 .5rem;font-weight:600}
+.field{margin-bottom:.75rem}
+.field label{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6b7a8d;display:block;margin-bottom:3px}
+.field .row{display:flex;gap:6px;align-items:center}
+.field input[type=number],.field select{padding:7px 10px;border:0.5px solid #c8c4bc;border-radius:2px;font-family:'Barlow',sans-serif;font-size:13px;background:#fff;color:#1a1a2e;outline:none;transition:border-color .15s}
+.field .row input[type=number]{flex:1}
+.field input[type=number]:focus,.field select:focus{border-color:#c0392b}
+.field select{width:100%}
+.field .unit{font-size:11px;color:#8a9bb0;white-space:nowrap;min-width:60px}
+.field .hint{font-size:11px;color:#8a9bb0;margin-top:3px;line-height:1.5}
+.divider{height:0.5px;background:#e8e4dc;margin:.875rem 0}
+.results{background:#0d1b2a;border-radius:2px;padding:1.25rem}
+.res-sec-head{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8a9bb0;border-bottom:1px solid #c0392b;padding-bottom:3px;margin-bottom:.875rem}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:1rem}
+.met{background:#1a2e42;border-radius:2px;padding:.75rem .875rem}
+.met-lbl{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#8a9bb0;margin-bottom:4px}
+.met-val{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#e8dcc8;line-height:1}
+.met-unit{font-size:10px;color:#8a9bb0;margin-top:3px}
+.met.ok .met-val{color:#4caf88}
+.met.warn .met-val{color:#e07b29}
+.met.bad .met-val{color:#e05050}
+.status-bar{display:flex;align-items:flex-start;gap:10px;padding:.875rem 1rem;border-radius:2px;margin-bottom:.875rem;font-size:13px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.03em;line-height:1.5}
+.status-bar.ok{background:#0f3d28;color:#4caf88;border-left:3px solid #4caf88}
+.status-bar.warn{background:#3d2800;color:#e07b29;border-left:3px solid #e07b29}
+.status-bar.bad{background:#3d1010;color:#e05050;border-left:3px solid #e05050}
+.bal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:.875rem}
+.bal{background:#1a2e42;border-radius:2px;padding:.625rem .875rem;text-align:center}
+.bal-lbl{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8a9bb0;margin-bottom:4px}
+.bal-val{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#e8dcc8}
+.gen-section{background:#1a2e42;border-radius:2px;padding:.875rem 1rem;margin-bottom:.875rem}
+.gen-row{display:flex;justify-content:space-between;font-size:12px;color:#8a9bb0;padding:3px 0;font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em}
+.gen-row span:last-child{color:#e8dcc8;font-weight:500}
+.cost-bar{background:#1a2e42;border-radius:2px;padding:.875rem 1rem}
+.cost-row{display:flex;justify-content:space-between;font-size:13px;color:#8a9bb0;padding:3px 0;font-family:'Barlow Condensed',sans-serif;letter-spacing:.03em}
+.cost-row .amt{color:#e8dcc8}
+.cost-row.total{border-top:1px solid #2a3f55;margin-top:8px;padding-top:8px;font-size:18px;font-weight:700;color:#e8dcc8}
+.cost-row.total .amt{color:#c0392b}
+.ftr{background:#0d1b2a;padding:.875rem 2rem;display:flex;justify-content:space-between;align-items:center;margin-top:0}
+.ftr-txt{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:#4a6080;letter-spacing:.08em;text-transform:uppercase}
+.ftr a{color:#4a6080;text-decoration:none}
+.ftr a:hover{color:#8a9bb0}
+@media(max-width:700px){
+  .cols{grid-template-columns:1fr}
+  .bal-grid{grid-template-columns:1fr 1fr}
+  .wrapper{padding:1rem}
+  .hdr{padding:.875rem 1rem}
+  .title-bar{padding:.5rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <a href="report.html" class="logo">SURE SHOT <span>MARINE</span></a>
+    <div class="logo-sub">Mobile Marine Electrical · San Francisco Bay</div>
+  </div>
+  <div class="hdr-right">
+    <a href="report.html" class="back-link">← Back to report</a>
+    <div class="hdr-badge">Sizing calculator</div>
+  </div>
+</div>
+
+<div class="title-bar">
+  <h1>Off-grid power sizing calculator</h1>
+  <span class="sub">Pier 50 Barge Security System</span>
+</div>
+
+<div class="wrapper">
+
+  <div class="intro">
+    <strong>How to use this tool:</strong> Adjust any value below and results update instantly. Start with the load inputs to reflect your actual equipment, then experiment with solar panel count, battery units, and generator options to find the configuration that meets your uptime requirements and budget. All values pre-loaded from the Sure Shot Marine engineering assessment.
+  </div>
+
+  <div class="cols">
+    <div class="panel">
+      <div class="sec-head">Load inputs</div>
+
+      <div class="subsec">Cameras (PoE)</div>
+      <div class="field">
+        <label>G6 Turret — quantity</label>
+        <div class="row"><input type="number" id="q_turret" value="8" min="0" max="30"><span class="unit">× 12.5 W each</span></div>
+      </div>
+      <div class="field">
+        <label>G6 Dome — quantity</label>
+        <div class="row"><input type="number" id="q_dome" value="2" min="0" max="30"><span class="unit">× 9.25 W each</span></div>
+      </div>
+      <div class="field">
+        <label>Other PoE cameras — quantity</label>
+        <div class="row"><input type="number" id="q_other" value="0" min="0" max="30"><span class="unit">cameras</span></div>
+      </div>
+      <div class="field">
+        <label>Other camera wattage each</label>
+        <div class="row"><input type="number" id="w_other" value="15" min="1" max="100"><span class="unit">W each</span></div>
+      </div>
+
+      <div class="subsec">Network &amp; connectivity</div>
+      <div class="field">
+        <label>UniFi Cloud Gateway Max</label>
+        <div class="row"><input type="number" id="w_gateway" value="60" min="0" max="200"><span class="unit">W max draw</span></div>
+      </div>
+      <div class="field">
+        <label>Starlink power draw</label>
+        <div class="row"><input type="number" id="w_starlink" value="150" min="0" max="300"><span class="unit">W</span></div>
+        <div class="hint">Standard Gen3 ≈ 100W &nbsp;·&nbsp; High-performance ≈ 150W</div>
+      </div>
+      <div class="field">
+        <label>Other loads</label>
+        <div class="row"><input type="number" id="w_other_load" value="0" min="0" max="500"><span class="unit">W</span></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="sec-head">Solar inputs</div>
+
+      <div class="field">
+        <label>Peak sun hours per day</label>
+        <div class="row"><input type="number" id="psh" value="5.5" min="1" max="8" step="0.1"><span class="unit">hr / day</span></div>
+        <div class="hint">SF Bay optimistic average: 5.5 &nbsp;·&nbsp; Winter worst-case: 3.0–3.5</div>
+      </div>
+      <div class="field">
+        <label>System efficiency</label>
+        <div class="row"><input type="number" id="eff" value="85" min="50" max="98"><span class="unit">%</span></div>
+        <div class="hint">Typical MPPT + wiring losses: 80–90%</div>
+      </div>
+      <div class="field">
+        <label>Panel wattage each</label>
+        <div class="row"><input type="number" id="w_panel" value="400" min="50" max="800"><span class="unit">W / panel</span></div>
+      </div>
+      <div class="field">
+        <label>Number of panels</label>
+        <div class="row"><input type="number" id="n_panels" value="4" min="1" max="20"><span class="unit">panels</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="sec-head">Battery configuration</div>
+
+      <div class="field">
+        <label>Battery unit capacity</label>
+        <div class="row"><input type="number" id="batt_wh" value="4096" min="500" max="20000"><span class="unit">Wh / unit</span></div>
+        <div class="hint">DELTA Pro 3: 4,096 Wh &nbsp;·&nbsp; DELTA 2 Max: 2,048 Wh</div>
+      </div>
+      <div class="field">
+        <label>Number of battery units</label>
+        <div class="row"><input type="number" id="n_batt" value="1" min="1" max="6"><span class="unit">units</span></div>
+      </div>
+      <div class="field">
+        <label>Depth of discharge (DoD)</label>
+        <div class="row"><input type="number" id="dod" value="90" min="50" max="100"><span class="unit">%</span></div>
+        <div class="hint">LFP chemistry safe max: 90–95%</div>
+      </div>
+      <div class="field">
+        <label>Autonomy target</label>
+        <div class="row"><input type="number" id="autonomy" value="14" min="1" max="72"><span class="unit">hours</span></div>
+        <div class="hint">Overnight ≈ 14 hr &nbsp;·&nbsp; Full day buffer ≈ 24 hr</div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="sec-head">Generator backstop</div>
+
+      <div class="field">
+        <label>Use generator backup?</label>
+        <select id="use_gen">
+          <option value="1">Yes — Honda EU2200i or similar</option>
+          <option value="0">No — solar only</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Generator rated output</label>
+        <div class="row"><input type="number" id="gen_w" value="1800" min="500" max="10000"><span class="unit">W rated</span></div>
+      </div>
+      <div class="field">
+        <label>Fuel consumption at load</label>
+        <div class="row"><input type="number" id="gen_gph" value="0.35" min="0.1" max="3" step="0.05"><span class="unit">gal / hr</span></div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="sec-head">Equipment costs</div>
+
+      <div class="field">
+        <label>Power station — unit cost</label>
+        <div class="row"><input type="number" id="c_batt" value="2999" min="0"><span class="unit">$ / unit</span></div>
+      </div>
+      <div class="field">
+        <label>Solar panel — unit cost</label>
+        <div class="row"><input type="number" id="c_panel" value="400" min="0"><span class="unit">$ / panel</span></div>
+      </div>
+      <div class="field">
+        <label>Generator cost</label>
+        <div class="row"><input type="number" id="c_gen" value="1199" min="0"><span class="unit">$</span></div>
+      </div>
+      <div class="field">
+        <label>Cables &amp; miscellaneous</label>
+        <div class="row"><input type="number" id="c_misc" value="30" min="0"><span class="unit">$</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="results">
+    <div class="res-sec-head">Live results — updates as you type</div>
+
+    <div class="res-grid">
+      <div class="met" id="m_load">
+        <div class="met-lbl">Total continuous load</div>
+        <div class="met-val" id="v_load">—</div>
+        <div class="met-unit">watts</div>
+      </div>
+      <div class="met" id="m_daily">
+        <div class="met-lbl">Daily energy</div>
+        <div class="met-val" id="v_daily">—</div>
+        <div class="met-unit">kWh / day</div>
+      </div>
+      <div class="met" id="m_solar">
+        <div class="met-lbl">Solar yield</div>
+        <div class="met-val" id="v_solar">—</div>
+        <div class="met-unit">kWh / day</div>
+      </div>
+      <div class="met" id="m_batt">
+        <div class="met-lbl">Usable battery</div>
+        <div class="met-val" id="v_batt">—</div>
+        <div class="met-unit">kWh</div>
+      </div>
+      <div class="met" id="m_runtime">
+        <div class="met-lbl">Battery runtime</div>
+        <div class="met-val" id="v_runtime">—</div>
+        <div class="met-unit">hours</div>
+      </div>
+      <div class="met" id="m_covers">
+        <div class="met-lbl">Covers autonomy?</div>
+        <div class="met-val" id="v_covers">—</div>
+        <div class="met-unit">hr target</div>
+      </div>
+    </div>
+
+    <div class="status-bar ok" id="status_bar">Calculating...</div>
+
+    <div class="bal-grid">
+      <div class="bal">
+        <div class="bal-lbl">Solar vs load balance</div>
+        <div class="bal-val" id="v_balance">—</div>
+      </div>
+      <div class="bal">
+        <div class="bal-lbl">Generator charge time</div>
+        <div class="bal-val" id="v_gentime">—</div>
+      </div>
+      <div class="bal">
+        <div class="bal-lbl">Weekly fuel estimate</div>
+        <div class="bal-val" id="v_fuel">—</div>
+      </div>
+    </div>
+
+    <div class="gen-section" id="gen_section">
+      <div class="gen-row"><span>Generator output</span><span id="g_out">—</span></div>
+      <div class="gen-row"><span>Match to DELTA Pro 3 charge rate (1,800W)</span><span id="g_match">—</span></div>
+      <div class="gen-row"><span>Load factor at full system load</span><span id="g_lf">—</span></div>
+      <div class="gen-row"><span>Daily solar deficit covered by generator</span><span id="g_deficit">—</span></div>
+    </div>
+
+    <div class="cost-bar">
+      <div class="cost-row"><span>Power station(s)</span><span class="amt" id="c_batt_out">—</span></div>
+      <div class="cost-row"><span>Solar panels</span><span class="amt" id="c_panel_out">—</span></div>
+      <div class="cost-row"><span>Generator</span><span class="amt" id="c_gen_out">—</span></div>
+      <div class="cost-row"><span>Cables &amp; miscellaneous</span><span class="amt" id="c_misc_out">—</span></div>
+      <div class="cost-row total"><span>Total system cost</span><span class="amt" id="c_total_out">—</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ftr">
+  <div class="ftr-txt">Sure Shot Marine &nbsp;·&nbsp; Mobile Marine Electrical &nbsp;·&nbsp; SF Bay Area &nbsp;·&nbsp; <a href="https://sureshotmarine.com">sureshotmarine.com</a></div>
+  <div class="ftr-txt">Prepared for Pier 50 — confidential</div>
+</div>
+
+<script>
+function $(id){return document.getElementById(id)}
+function n(id){return parseFloat($(id).value)||0}
+function ni(id){return parseInt($(id).value)||0}
+function fmt$(v){return '$'+Math.round(v).toLocaleString()}
+function fmtKwh(v){return v.toFixed(2)}
+function fmtH(v){return v.toFixed(1)}
+
+function calc(){
+  const q_turret=ni('q_turret'),q_dome=ni('q_dome'),q_other=ni('q_other');
+  const w_other=n('w_other'),w_gateway=n('w_gateway'),w_starlink=n('w_starlink'),w_other_load=n('w_other_load');
+  const psh=n('psh'),eff=n('eff')/100;
+  const w_panel=n('w_panel'),n_panels=ni('n_panels');
+  const batt_wh=n('batt_wh'),n_batt=ni('n_batt'),dod=n('dod')/100,autonomy=n('autonomy');
+  const use_gen=ni('use_gen'),gen_w=n('gen_w'),gen_gph=n('gen_gph');
+  const c_batt_u=n('c_batt'),c_panel_u=n('c_panel'),c_gen_u=n('c_gen'),c_misc_u=n('c_misc');
+
+  const camera_w=q_turret*12.5+q_dome*9.25+q_other*w_other;
+  const total_w=camera_w+w_gateway+w_starlink+w_other_load;
+  const daily_kwh=total_w*24/1000;
+  const solar_kwh=w_panel*n_panels*psh*eff/1000;
+  const batt_usable=batt_wh*n_batt*dod/1000;
+  const runtime_h=total_w>0?batt_usable*1000/total_w:0;
+  const covers=runtime_h>=autonomy;
+  const balance_kwh=solar_kwh-daily_kwh;
+  const deficit_kwh=Math.max(0,-balance_kwh);
+  const gen_charge_h=use_gen&&gen_w>0?(batt_usable*1000*0.6)/gen_w:0;
+  const gen_per_night_h=use_gen&&gen_w>0?deficit_kwh/gen_w:0;
+  const weekly_fuel=use_gen?gen_per_night_h*7*gen_gph:0;
+  const c_batts=c_batt_u*n_batt;
+  const c_panels=c_panel_u*n_panels;
+  const c_gen_total=use_gen?c_gen_u:0;
+  const c_total=c_batts+c_panels+c_gen_total+c_misc_u;
+
+  $('v_load').textContent=Math.round(total_w)+'W';
+  $('v_daily').textContent=fmtKwh(daily_kwh);
+  $('v_solar').textContent=fmtKwh(solar_kwh);
+  $('v_batt').textContent=fmtKwh(batt_usable);
+  $('v_runtime').textContent=fmtH(runtime_h);
+  $('v_covers').textContent=Math.round(autonomy)+'h';
+
+  const sb=$('status_bar');
+  if(covers&&balance_kwh>=0){
+    sb.className='status-bar ok';
+    sb.textContent='System is fully self-sufficient — solar covers daily load and battery meets the autonomy target.';
+    $('m_runtime').className='met ok';$('m_solar').className='met ok';$('m_covers').className='met ok';
+  } else if(covers&&use_gen){
+    sb.className='status-bar warn';
+    sb.textContent='Battery meets autonomy target. Generator needed for approximately '+Math.round(gen_per_night_h*60)+' min/night to cover the solar deficit.';
+    $('m_runtime').className='met ok';$('m_solar').className='met warn';$('m_covers').className='met ok';
+  } else if(!covers&&use_gen){
+    sb.className='status-bar warn';
+    sb.textContent='Battery runtime ('+fmtH(runtime_h)+' hr) falls short of the '+Math.round(autonomy)+' hr autonomy target. Generator backstop required — consider adding battery capacity.';
+    $('m_runtime').className='met warn';$('m_covers').className='met warn';$('m_solar').className='met warn';
+  } else {
+    sb.className='status-bar bad';
+    sb.textContent='Insufficient — battery runtime ('+fmtH(runtime_h)+' hr) does not meet the '+Math.round(autonomy)+' hr target and no generator is selected. Add panels, battery, or enable generator.';
+    $('m_runtime').className='met bad';$('m_covers').className='met bad';
+    $('m_solar').className=balance_kwh<0?'met bad':'met ok';
+  }
+
+  const balSign=balance_kwh>=0?'+':'';
+  $('v_balance').textContent=balSign+fmtKwh(balance_kwh)+' kWh/day';
+  $('v_gentime').textContent=use_gen?Math.round(gen_charge_h*60)+' min':'N/A';
+  $('v_fuel').textContent=use_gen?weekly_fuel.toFixed(1)+' gal/wk':'N/A';
+
+  $('g_out').textContent=gen_w.toLocaleString()+'W rated';
+  $('g_match').textContent=gen_w===1800?'Perfect match':''+gen_w+'W — '+(gen_w>1800?'over-spec, will throttle':'under-spec for 1,800W charge rate');
+  $('g_lf').textContent=gen_w>0?Math.round(total_w/gen_w*100)+'%':'—';
+  $('g_deficit').textContent=use_gen?(deficit_kwh>0?fmtKwh(deficit_kwh)+' kWh (~'+Math.round(gen_per_night_h*60)+' min/night)':'No deficit — solar surplus'):'Generator disabled';
+  $('gen_section').style.opacity=use_gen?'1':'0.45';
+
+  $('c_batt_out').textContent=fmt$(c_batts)+' ('+n_batt+'×)';
+  $('c_panel_out').textContent=fmt$(c_panels)+' ('+n_panels+'×)';
+  $('c_gen_out').textContent=use_gen?fmt$(c_gen_total):'$0 (disabled)';
+  $('c_misc_out').textContent=fmt$(c_misc_u);
+  $('c_total_out').textContent=fmt$(c_total);
+}
+
+document.querySelectorAll('input,select').forEach(el=>el.addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>

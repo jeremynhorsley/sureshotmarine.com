@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pier 50 Power System — Engineering Report — Sure Shot Marine</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;font-size:14px;background:#f5f3ef;color:#1a1a2e;min-height:100vh}
+.hdr{background:#0d1b2a;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:700;color:#fff;letter-spacing:.04em;text-decoration:none}
+.logo span{color:#c0392b}
+.logo-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:#8a9bb0;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.hdr-badge{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:#c0392b;color:#fff;padding:4px 10px;border-radius:2px}
+.title-bar{background:#c0392b;padding:.75rem 2rem;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.title-bar h1{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:.04em}
+.title-bar .sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.06em;text-transform:uppercase}
+.meta-bar{background:#1a2e42;padding:.5rem 2rem;display:flex;gap:2rem;flex-wrap:wrap}
+.meta-item{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:#8a9bb0;letter-spacing:.08em;text-transform:uppercase}
+.meta-item span{color:#e8dcc8;font-weight:500}
+.wrapper{max-width:960px;margin:0 auto;padding:1.5rem 2rem 2rem}
+.calc-cta{background:#0d1b2a;border-radius:2px;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.calc-cta-text{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:#8a9bb0;letter-spacing:.03em;line-height:1.5}
+.calc-cta-text strong{color:#e8dcc8;font-size:14px;display:block;margin-bottom:3px}
+.calc-btn{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:#c0392b;color:#fff;padding:9px 20px;border-radius:2px;text-decoration:none;white-space:nowrap;border:none;cursor:pointer;transition:background .15s}
+.calc-btn:hover{background:#a93226}
+.section{margin-bottom:1.75rem}
+.sec-head{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#8a9bb0;border-bottom:1px solid #c0392b;padding-bottom:4px;margin-bottom:1rem}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8a9bb0;text-align:left;padding:5px 8px 7px;border-bottom:1px solid #2a3a4a;background:#fff}
+th.r{text-align:right}
+td{padding:7px 8px;border-bottom:0.5px solid #e8e4dc;color:#1a1a2e;vertical-align:top;background:#fff}
+td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+td.muted{color:#6b7a8d;font-size:12px}
+td small{display:block;font-size:11px;color:#6b7a8d;margin-top:2px;line-height:1.4}
+tr.subtotal td{background:#f5f3ef;font-weight:500;border-bottom:1px solid #c8c4bc}
+tr.total td{background:#0d1b2a;color:#e8dcc8;font-weight:500;border-bottom:none}
+tr.total td.big{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#c0392b}
+tr.total td.dim{color:#8a9bb0;font-size:12px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:1.25rem}
+.metric{background:#0d1b2a;border-radius:2px;padding:.75rem .875rem}
+.metric-label{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#8a9bb0;margin-bottom:4px}
+.metric-val{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#e8dcc8;line-height:1}
+.metric-val.accent{color:#e07b29}
+.metric-val.good{color:#4caf88}
+.metric-unit{font-size:10px;color:#8a9bb0;margin-top:3px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.calc-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8a9bb0;margin-bottom:4px}
+.calc-block{background:#fff;border:0.5px solid #d4cfc6;border-left:3px solid #c0392b;border-radius:2px;padding:.75rem 1rem;margin-bottom:.875rem}
+.calc-block .formula{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:#1a2e42;line-height:1.9;letter-spacing:.02em}
+.calc-block .result{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#c0392b;margin-top:6px;border-top:0.5px solid #e8e4dc;padding-top:6px}
+.flag-box{background:#fff8f0;border:0.5px solid #e8a87c;border-left:3px solid #e07b29;border-radius:2px;padding:.875rem 1rem;margin-bottom:.75rem}
+.flag-head{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#a05020;margin-bottom:5px;font-weight:600}
+.flag-text{font-size:13px;color:#5a3a1a;line-height:1.6}
+.assump{font-size:13px;color:#4a5568;line-height:1.7;padding:.75rem 1rem;border-left:2px solid #d4cfc6;margin-bottom:.625rem;background:#fff;border-radius:0 2px 2px 0}
+.assump-num{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;color:#8a9bb0;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.ftr{background:#0d1b2a;padding:.875rem 2rem;display:flex;justify-content:space-between;align-items:center;margin-top:0}
+.ftr-txt{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:#4a6080;letter-spacing:.08em;text-transform:uppercase}
+.ftr a{color:#4a6080;text-decoration:none}
+.ftr a:hover{color:#8a9bb0}
+@media(max-width:680px){
+  .two-col{grid-template-columns:1fr}
+  .wrapper{padding:1rem}
+  .hdr,.meta-bar{padding:.875rem 1rem}
+  .title-bar{padding:.625rem 1rem}
+  .meta-bar{gap:1rem}
+  .calc-cta{flex-direction:column;align-items:flex-start}
+}
+@media print{
+  .calc-cta{display:none}
+  .hdr,.title-bar,.meta-bar,.ftr{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <a href="https://sureshotmarine.com" class="logo">SURE SHOT <span>MARINE</span></a>
+    <div class="logo-sub">Mobile Marine Electrical · San Francisco Bay</div>
+  </div>
+  <div class="hdr-badge">Engineering Report</div>
+</div>
+
+<div class="title-bar">
+  <div>
+    <h1>Pier 50 Barge — Off-Grid Power System</h1>
+    <span class="sub">Security camera network &amp; Starlink — design summary</span>
+  </div>
+</div>
+
+<div class="meta-bar">
+  <div class="meta-item">Client <span>Sarah / Pier 50 Barge</span></div>
+  <div class="meta-item">Date <span>May 2026</span></div>
+  <div class="meta-item">Revision <span>1.0</span></div>
+  <div class="meta-item">Prepared by <span>Sure Shot Marine</span></div>
+  <div class="meta-item">Location <span>SF Bay, CA</span></div>
+</div>
+
+<div class="wrapper">
+
+  <div class="calc-cta">
+    <div class="calc-cta-text">
+      <strong>Interactive sizing calculator</strong>
+      Adjust panel count, battery units, Starlink wattage, sunshine hours, costs, and more — results update live. Use this to model alternative configurations or verify assumptions.
+    </div>
+    <a href="calculator.html" class="calc-btn">Open calculator →</a>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">System load analysis</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Device</th>
+          <th>Type</th>
+          <th class="r">Qty</th>
+          <th class="r">Each (W)</th>
+          <th class="r">Total (W)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>UniFi G6 Turret</td>
+          <td class="muted">PoE camera (802.3af)</td>
+          <td class="r">8×</td>
+          <td class="r">12.5</td>
+          <td class="r">100.0</td>
+        </tr>
+        <tr>
+          <td>UniFi G6 Dome</td>
+          <td class="muted">PoE camera (802.3af)</td>
+          <td class="r">2×</td>
+          <td class="r">9.25</td>
+          <td class="r">18.5</td>
+        </tr>
+        <tr class="subtotal">
+          <td colspan="4">Camera PoE subtotal</td>
+          <td class="r">118.5</td>
+        </tr>
+        <tr>
+          <td>UniFi Cloud Gateway Max<small>Router · NVR · PoE switch — integrated</small></td>
+          <td class="muted">AC powered</td>
+          <td class="r">1×</td>
+          <td class="r">60.0</td>
+          <td class="r">60.0</td>
+        </tr>
+        <tr>
+          <td>Starlink (high-performance)<small>Always-on, continuous video streaming</small></td>
+          <td class="muted">AC powered</td>
+          <td class="r">1×</td>
+          <td class="r">150.0</td>
+          <td class="r">150.0</td>
+        </tr>
+        <tr class="total">
+          <td colspan="4">Continuous load total</td>
+          <td class="r big">328.5 W</td>
+        </tr>
+        <tr class="total">
+          <td colspan="4" class="dim">Daily energy consumption (328.5W × 24 hr)</td>
+          <td class="r" style="font-size:13px;color:#e8dcc8">7.88 kWh/day</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">Sizing calculations</div>
+    <div class="two-col">
+      <div>
+        <div class="calc-label">Solar array sizing</div>
+        <div class="calc-block">
+          <div class="formula">
+            Array = Load ÷ Peak sun hours ÷ Efficiency<br>
+            Array = 7.88 kWh ÷ 5.5 hr ÷ 0.85
+          </div>
+          <div class="result">= 1,685W required → 4 × 400W panels selected (1,600W)</div>
+        </div>
+        <div class="calc-label">Daily solar yield</div>
+        <div class="calc-block">
+          <div class="formula">
+            Yield = 1,600W × 5.5 hr × 0.85
+          </div>
+          <div class="result">= 7.48 kWh/day generated</div>
+        </div>
+      </div>
+      <div>
+        <div class="calc-label">Battery overnight runtime</div>
+        <div class="calc-block">
+          <div class="formula">
+            Usable = 4,096 Wh × 90% DoD = 3,686 Wh<br>
+            Runtime = 3,686 Wh ÷ 328.5W
+          </div>
+          <div class="result">= 11.2 hours before generator assist</div>
+        </div>
+        <div class="calc-label">Generator recharge time</div>
+        <div class="calc-block">
+          <div class="formula">
+            Charge needed = 4,096 Wh × 60% = 2,458 Wh<br>
+            Time = 2,458 Wh ÷ 1,800W charge rate
+          </div>
+          <div class="result">= 1.37 hr (~80 min) to restore 60% capacity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">Energy balance summary</div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Daily consumption</div><div class="metric-val">7.88</div><div class="metric-unit">kWh / day</div></div>
+      <div class="metric"><div class="metric-label">Solar generation</div><div class="metric-val good">7.48</div><div class="metric-unit">kWh / day (avg)</div></div>
+      <div class="metric"><div class="metric-label">Daily deficit</div><div class="metric-val accent">0.40</div><div class="metric-unit">kWh → ~13 min gen</div></div>
+      <div class="metric"><div class="metric-label">Battery runtime</div><div class="metric-val good">11.2</div><div class="metric-unit">hours overnight</div></div>
+      <div class="metric"><div class="metric-label">Gen charge cycle</div><div class="metric-val">80</div><div class="metric-unit">minutes / night</div></div>
+      <div class="metric"><div class="metric-label">Weekly fuel est.</div><div class="metric-val">3.5</div><div class="metric-unit">gallons / week</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">Equipment specification</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Qty</th>
+          <th>Key specifications</th>
+          <th class="r">Est. cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>EcoFlow DELTA Pro 3</strong><small>Primary power station / UPS</small></td>
+          <td>1×</td>
+          <td>4,096 Wh LFP · 4,000W AC output · Online UPS 0ms transfer · 2,600W solar input max · 120/240V</td>
+          <td class="r">$2,999</td>
+        </tr>
+        <tr>
+          <td><strong>EcoFlow 400W Foldable Panel</strong><small>Primary solar array</small></td>
+          <td>4×</td>
+          <td>400W each · 23% efficiency · ETFE · IP68 weatherproof · 35 lbs · integrated kickstand · stows in carry case</td>
+          <td class="r">$1,600</td>
+        </tr>
+        <tr>
+          <td><strong>Honda EU2200i Generator</strong><small>Overnight backstop</small></td>
+          <td>1×</td>
+          <td>1,800W rated continuous · 48–57 dB(A) · 0.95 gal tank · CO-Minder auto shutoff · clean sine wave inverter output</td>
+          <td class="r">$1,199</td>
+        </tr>
+        <tr>
+          <td><strong>MC4 Extension Cables</strong><small>Panel interconnect</small></td>
+          <td>2×</td>
+          <td>10 ft · weatherproof · UV-resistant jacketing</td>
+          <td class="r">$30</td>
+        </tr>
+        <tr class="total">
+          <td colspan="3"><strong>Total system estimate</strong></td>
+          <td class="r big">$5,828</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">Design assumptions</div>
+    <div class="assump"><div class="assump-num">1 — Solar basis</div>Optimistic design. Annual average peak sun hours of 5.5 hr/day used (NREL data, SF Bay). December–January Bay fog can reduce effective yield to 3.0–3.5 hr/day, increasing generator dependence during those months. Foldable panels allow manual angle optimization, partially offsetting low fixed-tilt yield assumptions.</div>
+    <div class="assump"><div class="assump-num">2 — System efficiency</div>85% overall efficiency applied (MPPT conversion + wiring losses + battery round-trip). Conservative relative to EcoFlow published MPPT efficiency of 93%+.</div>
+    <div class="assump"><div class="assump-num">3 — Starlink power draw</div>150W assumed (high-performance model, always-on streaming). Actual draw should be confirmed with a clamp meter at installation. Standard Gen 3 Starlink (~100W) would reduce total load to ~278W and improve all sizing margins accordingly.</div>
+    <div class="assump"><div class="assump-num">4 — Battery depth of discharge</div>90% DoD applied to rated 4,096 Wh capacity, yielding 3,686 Wh usable. LFP chemistry supports this cycle depth without accelerated degradation at moderate ambient temperatures.</div>
+    <div class="assump"><div class="assump-num">5 — Generator sizing</div>Honda EU2200i matched at 1,800W to EcoFlow DELTA Pro 3 AC charge rate of 1,800W — exact match. Load factor ~82% of rated maximum, within Honda's continuous duty rating. Fuel estimate based on 0.3–0.4 gal/hr at half load.</div>
+  </div>
+
+  <div class="section">
+    <div class="sec-head">Open items prior to procurement</div>
+    <div class="flag-box">
+      <div class="flag-head">⚠ Gateway Max PSU oversubscription</div>
+      <div class="flag-text">The UniFi Cloud Gateway Max has an internal 100W PSU. Camera PoE demand is approximately 118.5W (10 cameras × average draw), which exceeds PSU capacity before accounting for chassis overhead (~40W). A dedicated PoE switch (e.g. UniFi Switch Flex Mini, ~$49) is recommended to offload camera power. This issue is independent of the power system and must be resolved to achieve 100% uptime.</div>
+    </div>
+    <div class="flag-box">
+      <div class="flag-head">⚠ Starlink model confirmation</div>
+      <div class="flag-text">Actual Starlink model and power brick wattage should be confirmed on-site with a clamp meter before finalizing battery sizing. A 50W variance in Starlink draw meaningfully affects the daily energy balance and generator runtime calculations. Use the calculator above to model both scenarios.</div>
+    </div>
+    <div class="flag-box">
+      <div class="flag-head">⚠ USCG fuel storage compliance</div>
+      <div class="flag-text">Generator fuel must be stored in a USCG-approved portable container, topside, in a ventilated location. Generator must operate on open deck only — never below or in an enclosed space. CO-Minder provides automatic shutoff but does not substitute for proper placement and ventilation.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ftr">
+  <div class="ftr-txt">Sure Shot Marine &nbsp;·&nbsp; Mobile Marine Electrical &nbsp;·&nbsp; SF Bay Area &nbsp;·&nbsp; <a href="https://sureshotmarine.com">sureshotmarine.com</a></div>
+  <div class="ftr-txt">Confidential — prepared for client review &nbsp;·&nbsp; Rev 1.0 May 2026</div>
+</div>
+
+</body>
+</html>
