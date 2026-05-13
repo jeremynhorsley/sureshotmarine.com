@@ -341,24 +341,27 @@ function calc(){
   $('v_runtime').textContent=fmtH(runtime_h);
   $('v_covers').textContent=Math.round(autonomy)+'h';
 
+  const solar_ok=balance_kwh>=0;
+  const batt_ok=covers;
+  const backstop_ok=use_gen||batt_ok;
   const sb=$('status_bar');
-  if(covers&&balance_kwh>=0){
+  if(solar_ok&&batt_ok){
     sb.className='status-bar ok';
-    sb.textContent='System is fully self-sufficient — solar covers daily load and battery meets the autonomy target.';
+    sb.textContent='Fully self-sufficient — solar covers daily load and battery alone meets the '+Math.round(autonomy)+' hr autonomy target. No generator needed.';
     $('m_runtime').className='met ok';$('m_solar').className='met ok';$('m_covers').className='met ok';
-  } else if(covers&&use_gen){
+  } else if(solar_ok&&use_gen){
+    sb.className='status-bar ok';
+    sb.textContent='Solar covers daily load. Battery runs '+fmtH(runtime_h)+' hr — generator provides overnight backstop (~'+Math.round(nightly_gen_h*60)+' min/night). System meets uptime target.';
+    $('m_runtime').className=batt_ok?'met ok':'met warn';$('m_solar').className='met ok';$('m_covers').className='met ok';
+  } else if(!solar_ok&&backstop_ok){
     sb.className='status-bar warn';
-    sb.textContent='Battery meets autonomy target. Generator needed for approximately '+Math.round(nightly_gen_h*60)+' min/night to cover the solar deficit.';
-    $('m_runtime').className='met ok';$('m_solar').className='met warn';$('m_covers').className='met ok';
-  } else if(!covers&&use_gen){
-    sb.className='status-bar warn';
-    sb.textContent='Battery runtime ('+fmtH(runtime_h)+' hr) falls short of the '+Math.round(autonomy)+' hr autonomy target. Generator backstop required — consider adding battery capacity.';
-    $('m_runtime').className='met warn';$('m_covers').className='met warn';$('m_solar').className='met warn';
+    sb.textContent='Solar deficit of '+fmtKwh(deficit_kwh)+' kWh/day — generator running ~'+Math.round(nightly_gen_h*60)+' min/night. Add panels to reduce generator dependence.';
+    $('m_runtime').className=batt_ok?'met ok':'met warn';$('m_solar').className='met warn';$('m_covers').className=backstop_ok?'met ok':'met warn';
   } else {
     sb.className='status-bar bad';
     sb.textContent='Insufficient — battery runtime ('+fmtH(runtime_h)+' hr) does not meet the '+Math.round(autonomy)+' hr target and no generator is selected. Add panels, battery, or enable generator.';
     $('m_runtime').className='met bad';$('m_covers').className='met bad';
-    $('m_solar').className=balance_kwh<0?'met bad':'met ok';
+    $('m_solar').className=solar_ok?'met ok':'met bad';
   }
 
   const balSign=balance_kwh>=0?'+':'';
