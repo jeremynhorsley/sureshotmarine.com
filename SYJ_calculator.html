@@ -326,8 +326,9 @@ function calc(){
   const balance_kwh=solar_kwh-daily_kwh;
   const deficit_kwh=Math.max(0,-balance_kwh);
   const gen_charge_h=use_gen&&gen_w>0?(batt_usable*1000*0.6)/gen_w:0;
-  const gen_per_night_h=use_gen&&gen_w>0?deficit_kwh/gen_w:0;
-  const weekly_fuel=use_gen?gen_per_night_h*7*gen_gph:0;
+  const deficit_gen_h=use_gen&&gen_w>0?deficit_kwh*1000/gen_w:0;
+  const nightly_gen_h=use_gen?Math.max(gen_charge_h,deficit_gen_h):0;
+  const weekly_fuel=use_gen?nightly_gen_h*7*gen_gph:0;
   const c_batts=c_batt_u*n_batt;
   const c_panels=c_panel_u*n_panels;
   const c_gen_total=use_gen?c_gen_u:0;
@@ -347,7 +348,7 @@ function calc(){
     $('m_runtime').className='met ok';$('m_solar').className='met ok';$('m_covers').className='met ok';
   } else if(covers&&use_gen){
     sb.className='status-bar warn';
-    sb.textContent='Battery meets autonomy target. Generator needed for approximately '+Math.round(gen_per_night_h*60)+' min/night to cover the solar deficit.';
+    sb.textContent='Battery meets autonomy target. Generator needed for approximately '+Math.round(nightly_gen_h*60)+' min/night to cover the solar deficit.';
     $('m_runtime').className='met ok';$('m_solar').className='met warn';$('m_covers').className='met ok';
   } else if(!covers&&use_gen){
     sb.className='status-bar warn';
@@ -362,13 +363,13 @@ function calc(){
 
   const balSign=balance_kwh>=0?'+':'';
   $('v_balance').textContent=balSign+fmtKwh(balance_kwh)+' kWh/day';
-  $('v_gentime').textContent=use_gen?Math.round(gen_charge_h*60)+' min':'N/A';
+  $('v_gentime').textContent=use_gen?Math.round(nightly_gen_h*60)+' min':'N/A';
   $('v_fuel').textContent=use_gen?weekly_fuel.toFixed(1)+' gal/wk':'N/A';
 
   $('g_out').textContent=gen_w.toLocaleString()+'W rated';
   $('g_match').textContent=gen_w===1800?'Perfect match':''+gen_w+'W — '+(gen_w>1800?'over-spec, will throttle':'under-spec for 1,800W charge rate');
   $('g_lf').textContent=gen_w>0?Math.round(total_w/gen_w*100)+'%':'—';
-  $('g_deficit').textContent=use_gen?(deficit_kwh>0?fmtKwh(deficit_kwh)+' kWh (~'+Math.round(gen_per_night_h*60)+' min/night)':'No deficit — solar surplus'):'Generator disabled';
+  $('g_deficit').textContent=use_gen?(deficit_kwh>0?fmtKwh(deficit_kwh)+' kWh (~'+Math.round(nightly_gen_h*60)+' min/night)':'No deficit — solar surplus'):'Generator disabled';
   $('gen_section').style.opacity=use_gen?'1':'0.45';
 
   $('c_batt_out').textContent=fmt$(c_batts)+' ('+n_batt+'×)';
