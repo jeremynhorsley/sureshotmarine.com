@@ -478,4 +478,21 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
      .btn, a.btn { width: 100%; text-align: center; justify-content: center; }
      .hero__actions, .cta-row { flex-direction: column; }
    }
-}
+
+   /* ── FIELD PHOTO ── */
+   .field-photo {
+     margin: 0;
+   }
+   .field-photo img {
+     width: 100%;
+     height: auto;
+     display: block;
+   }
+   .field-photo figcaption {
+     font-family: var(--font-mono);
+     font-size: 0.72rem;
+     letter-spacing: 0.12em;
+     text-transform: uppercase;
+     color: var(--muted);
+     padding: 0.75rem 0 0;
+   }
