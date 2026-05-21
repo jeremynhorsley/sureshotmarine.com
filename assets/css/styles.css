@@ -496,3 +496,33 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
      color: var(--muted);
      padding: 0.75rem 0 0;
    }
+
+   /* ── DIAGNOSTIC PHOTOS ── */
+   .diagnostic-photos {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 1.5rem;
+     margin-top: 1.75rem;
+   }
+   .diagnostic-photo {
+     margin: 0;
+   }
+   .diagnostic-photo img {
+     width: 100%;
+     height: auto;
+     display: block;
+   }
+   .diagnostic-photo figcaption {
+     font-family: var(--font-mono);
+     font-size: 0.72rem;
+     letter-spacing: 0.12em;
+     text-transform: uppercase;
+     color: var(--muted);
+     padding: 0.75rem 0 0;
+   }
+   
+   @media (max-width: 720px) {
+     .diagnostic-photos {
+       grid-template-columns: 1fr;
+     }
+   }
