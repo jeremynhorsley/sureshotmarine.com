@@ -526,3 +526,44 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
        grid-template-columns: 1fr;
      }
    }
+
+/* ── DIAGNOSTIC SPLIT LAYOUT ── */
+.diagnostic-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.diagnostic-split__text h3 {
+  margin-bottom: 1.25rem;
+}
+.diagnostic-split__text p {
+  max-width: none;
+}
+.diagnostic-split__images {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.diagnostic-split__images .diagnostic-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.diagnostic-split__images .diagnostic-photo figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.75rem 0 0;
+}
+
+@media (max-width: 720px) {
+  .diagnostic-split {
+    grid-template-columns: 1fr;
+  }
+  .diagnostic-split__images {
+    order: -1;
+  }
+}
