@@ -1,23 +1,24 @@
 /* ==========================================================================
-   Sure Shot Marine — styles.css
+   Sure Shot Marine — styles.css — Chrome / Indigo edition
+   Palette: optical white · deep indigo · stainless chrome · signal red
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --navy:        #0C2340;
-  --navy-mid:    #163352;
-  --navy-light:  #1E4570;
-  --red:         #B11226;
-  --brass:       #9A7B2F;
-  --brass-light: #C4A84A;
-  --cream:       #F5EFE0;
-  --parchment:   #EAE0C8;
-  --tan:         #D4C8A8;
-  --fog:         #8FA8C0;
-  --teak:        #7B4F2E;
-  --text:        #2A3A4A;
-  --muted:       #4a5a70;
+  --navy:        #1B2D50;   /* deep indigo from boat lettering — was #0C2340 */
+  --navy-mid:    #243B68;   /* was #163352 */
+  --navy-light:  #2E4A7A;   /* was #1E4570 */
+  --red:         #A8192E;   /* signal red — was #B11226 */
+  --brass:       #7A8494;   /* chrome shadow — was #9A7B2F */
+  --brass-light: #B8BEC8;   /* chrome mid highlight — was #C4A84A */
+  --cream:       #F4F4F2;   /* optical white hull — was #F5EFE0 */
+  --parchment:   #ECEEF0;   /* cool light grey — was #EAE0C8 */
+  --tan:         #D8DCE4;   /* steel grey — was #D4C8A8 */
+  --fog:         #8A9EB8;   /* was #8FA8C0 */
+  --teak:        #4A5260;   /* chrome dark — was #7B4F2E */
+  --text:        #111E36;   /* deeper indigo text — was #2A3A4A */
+  --muted:       #4A5A72;   /* was #4a5a70 */
   --white:       #ffffff;
   --wrap-max:    900px;
   --font-display: 'Playfair Display', Georgia, serif;
@@ -129,7 +130,7 @@ nav[aria-label="Site"] a.active {
   background: repeating-linear-gradient(
     -55deg,
     transparent 0, transparent 28px,
-    rgba(154,123,47,0.06) 28px, rgba(154,123,47,0.06) 29px
+    rgba(184,190,200,0.04) 28px, rgba(184,190,200,0.04) 29px
   );
   pointer-events: none;
 }
@@ -175,7 +176,7 @@ nav[aria-label="Site"] a.active {
 }
 .hero__lede + .hero__lede {
   font-size: 0.97rem;
-  color: rgba(143,168,192,0.85);
+  color: rgba(138,158,184,0.85);
   border-left: 2px solid var(--brass);
   padding-left: 1rem;
   margin-top: 0.5rem;
@@ -210,7 +211,7 @@ nav[aria-label="Site"] a.active {
   font-size: 0.95rem;
   letter-spacing: 0.04em;
   text-decoration: none;
-  border: 1.5px solid rgba(12,35,64,0.3);
+  border: 1.5px solid rgba(27,45,80,0.3);
   border-radius: 2px;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
@@ -234,7 +235,7 @@ nav[aria-label="Site"] a.active {
 /* ── MAIN SECTIONS — base ── */
 main section {
   padding: 3rem 2rem;
-  border-bottom: 1px solid rgba(12,35,64,0.1);
+  border-bottom: 1px solid rgba(27,45,80,0.1);
 }
 main section:last-child { border-bottom: none; }
 
@@ -267,8 +268,8 @@ main p {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
   gap: 1px;
-  background: rgba(12,35,64,0.12);
-  border: 1px solid rgba(12,35,64,0.12);
+  background: rgba(27,45,80,0.12);
+  border: 1px solid rgba(27,45,80,0.12);
 }
 .grid--rates {
   grid-template-columns: repeat(2, 1fr);
@@ -306,7 +307,7 @@ main p {
   text-transform: uppercase;
   padding: 2px 7px;
   border-radius: 999px;
-  border: 1px solid rgba(12,35,64,0.18);
+  border: 1px solid rgba(27,45,80,0.18);
   color: var(--muted);
   background: var(--parchment);
 }
@@ -323,7 +324,7 @@ ul.clean li {
   font-size: 0.98rem;
   color: var(--navy);
   padding: 0.65rem 0 0.65rem 1.6rem;
-  border-bottom: 1px solid rgba(12,35,64,0.08);
+  border-bottom: 1px solid rgba(27,45,80,0.08);
   position: relative;
   line-height: 1.5;
 }
@@ -354,7 +355,7 @@ ul.clean li::before {
 .contact-value a {
   color: var(--navy);
   text-decoration: none;
-  border-bottom: 1.5px solid rgba(154,123,47,0.3);
+  border-bottom: 1.5px solid rgba(122,132,148,0.3);
   transition: color 0.15s, border-color 0.15s;
 }
 .contact-value a:hover { color: var(--brass); border-color: var(--brass); }
@@ -377,14 +378,12 @@ footer a { color: var(--brass-light); text-decoration: none; }
 footer a:hover { color: var(--cream); }
 
 /* ── SIGNATURE ── */
-.signature { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(12,35,64,0.1); }
+.signature { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(27,45,80,0.1); }
 .signature-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--navy); }
 .signature-meta { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
 
 /* ══════════════════════════════════════════
    PAGE-SPECIFIC SECTION COLOR BLOCKS
-   Using data-color attributes so each page
-   can specify its own color sequence cleanly
    ══════════════════════════════════════════ */
 
 /* Default section bg is cream */
@@ -397,8 +396,8 @@ main section[data-color="parchment"] .card:hover { background: var(--tan); }
 
 /* Tan sections */
 main section[data-color="tan"] { background: var(--tan); }
-main section[data-color="tan"] p { color: #3d4a52; }
-main section[data-color="tan"] .btn { border-color: rgba(12,35,64,0.25); color: var(--navy); }
+main section[data-color="tan"] p { color: #3a4252; }
+main section[data-color="tan"] .btn { border-color: rgba(27,45,80,0.25); color: var(--navy); }
 main section[data-color="tan"] .btn:hover { border-color: var(--brass); color: var(--brass); }
 main section[data-color="tan"] .card { background: var(--tan); }
 main section[data-color="tan"] .card:hover { background: var(--parchment); }
@@ -414,7 +413,7 @@ main section[data-color="navy"]::before {
   background: repeating-linear-gradient(
     -55deg,
     transparent 0, transparent 28px,
-    rgba(154,123,47,0.04) 28px, rgba(154,123,47,0.04) 29px
+    rgba(184,190,200,0.04) 28px, rgba(184,190,200,0.04) 29px
   );
   pointer-events: none;
 }
@@ -427,13 +426,13 @@ main section[data-color="navy"] h3::after {
 main section[data-color="navy"] p { color: var(--fog); max-width: 58ch; }
 main section[data-color="navy"] ul.clean li { color: var(--fog); border-bottom-color: rgba(255,255,255,0.08); }
 main section[data-color="navy"] ul.clean li::before { color: var(--brass-light); }
-main section[data-color="navy"] .btn { border-color: rgba(245,239,224,0.3); color: var(--cream); }
+main section[data-color="navy"] .btn { border-color: rgba(244,244,242,0.3); color: var(--cream); }
 main section[data-color="navy"] .btn:hover { border-color: var(--brass-light); color: var(--brass-light); }
 main section[data-color="navy"] .contact-value { color: var(--cream); }
-main section[data-color="navy"] .contact-value a { color: var(--cream); border-bottom-color: rgba(196,168,74,0.35); }
+main section[data-color="navy"] .contact-value a { color: var(--cream); border-bottom-color: rgba(184,190,200,0.35); }
 main section[data-color="navy"] .contact-value a:hover { color: var(--brass-light); border-bottom-color: var(--brass-light); }
 
-/* ── PROSE SECTION (centered single-column text) ── */
+/* ── PROSE SECTION ── */
 .prose {
   max-width: 62ch;
   margin: 0 auto;
@@ -448,84 +447,85 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
   color: var(--brass);
   margin-bottom: 1rem;
 }
-   /* ── RESPONSIVE ── */
-   @media (max-width: 720px) {
-     header {
-       flex-direction: column;
-       align-items: flex-start;
-       padding: 1rem 1.25rem;
-       gap: 0.75rem;
-     }
-     .brand h1 { font-size: 1.05rem; }
-     .brand p { display: none; }
-   
-     nav[aria-label="Site"] {
-       width: 100%;
-       display: flex;
-       flex-wrap: wrap;
-       gap: 0.5rem 1rem;
-     }
-     nav[aria-label="Site"] a { font-size: 0.7rem; }
-   
-     .hero { padding: 2.5rem 1.25rem; }
-     .hero__title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
-     main section { padding: 2rem 1.25rem; }
-     .grid { grid-template-columns: 1fr; }
-     footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; }
-   }
-   
-   @media (max-width: 480px) {
-     .btn, a.btn { width: 100%; text-align: center; justify-content: center; }
-     .hero__actions, .cta-row { flex-direction: column; }
-   }
 
-   /* ── FIELD PHOTO ── */
-   .field-photo {
-     margin: 0;
-   }
-   .field-photo img {
-     width: 100%;
-     height: auto;
-     display: block;
-   }
-   .field-photo figcaption {
-     font-family: var(--font-mono);
-     font-size: 0.72rem;
-     letter-spacing: 0.12em;
-     text-transform: uppercase;
-     color: var(--muted);
-     padding: 0.75rem 0 0;
-   }
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    gap: 0.75rem;
+  }
+  .brand h1 { font-size: 1.05rem; }
+  .brand p { display: none; }
 
-   /* ── DIAGNOSTIC PHOTOS ── */
-   .diagnostic-photos {
-     display: grid;
-     grid-template-columns: 1fr 1fr;
-     gap: 1.5rem;
-     margin-top: 1.75rem;
-   }
-   .diagnostic-photo {
-     margin: 0;
-   }
-   .diagnostic-photo img {
-     width: 100%;
-     height: auto;
-     display: block;
-   }
-   .diagnostic-photo figcaption {
-     font-family: var(--font-mono);
-     font-size: 0.72rem;
-     letter-spacing: 0.12em;
-     text-transform: uppercase;
-     color: var(--muted);
-     padding: 0.75rem 0 0;
-   }
-   
-   @media (max-width: 720px) {
-     .diagnostic-photos {
-       grid-template-columns: 1fr;
-     }
-   }
+  nav[aria-label="Site"] {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+  nav[aria-label="Site"] a { font-size: 0.7rem; }
+
+  .hero { padding: 2.5rem 1.25rem; }
+  .hero__title { font-size: clamp(1.6rem, 6vw, 2.2rem); }
+  main section { padding: 2rem 1.25rem; }
+  .grid { grid-template-columns: 1fr; }
+  footer { padding: 1rem 1.25rem; flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .btn, a.btn { width: 100%; text-align: center; justify-content: center; }
+  .hero__actions, .cta-row { flex-direction: column; }
+}
+
+/* ── FIELD PHOTO ── */
+.field-photo {
+  margin: 0;
+}
+.field-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.field-photo figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.75rem 0 0;
+}
+
+/* ── DIAGNOSTIC PHOTOS ── */
+.diagnostic-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+.diagnostic-photo {
+  margin: 0;
+}
+.diagnostic-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.diagnostic-photo figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.75rem 0 0;
+}
+
+@media (max-width: 720px) {
+  .diagnostic-photos {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ── DIAGNOSTIC SPLIT LAYOUT ── */
 .diagnostic-split {
@@ -567,6 +567,7 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
     order: -1;
   }
 }
+
 /* ── ABOUT PHOTO ── */
 .about-photo {
   margin: 0 0 2rem;
