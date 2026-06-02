@@ -598,3 +598,7 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
 .footer-cert img {
   opacity: 0.9;
 }
+.footer-abyc {
+  max-height: 50px;
+  width: auto;
+}
