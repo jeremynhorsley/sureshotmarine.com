@@ -581,3 +581,20 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
   object-fit: cover;
   object-position: center top;
 }
+.credentials {
+  padding: 2rem 0;
+}
+
+.credential-badge {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: #f5efe0;
+  border: 1px solid #d8d0bc;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.footer-cert img {
+  opacity: 0.9;
+}
