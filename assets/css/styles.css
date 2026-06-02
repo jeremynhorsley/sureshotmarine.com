@@ -584,15 +584,32 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
 .credentials {
   padding: 2rem 0;
 }
-
 .credential-badge {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+
   background: #f5efe0;
   border: 1px solid #d8d0bc;
   border-radius: 8px;
   padding: 1.5rem;
+}
+
+.abyc-logo {
+  width: auto;
+  height: 100px; /* adjust as needed */
+  flex-shrink: 0;
+}
+
+.credential-text h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 700px) {
+  .credential-badge {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 .footer-cert img {
