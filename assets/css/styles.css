@@ -611,11 +611,3 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
     text-align: center;
   }
 }
-
-.footer-cert img {
-  opacity: 0.9;
-}
-.footer-abyc {
-  max-height: 50px;
-  width: auto;
-}
