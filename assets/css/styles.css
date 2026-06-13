@@ -611,3 +611,13 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
     text-align: center;
   }
 }
+
+.work-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 1.75rem 0 0.85rem;
+}
+.work-group-label:first-of-type { margin-top: 0; }
