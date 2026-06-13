@@ -21,6 +21,12 @@
   </url>
 
   <url>
+    <loc>https://sureshotmarine.com/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://sureshotmarine.com/diagnostics.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
