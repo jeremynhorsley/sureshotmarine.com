@@ -9,18 +9,25 @@
   --navy-mid:    #163352;
   --navy-light:  #1E4570;
   --red:         #B11226;
-  --brass:       #9A7B2F;
-  --brass-light: #C4A84A;
+  --brass:       #C08A2E /*#9A7B2F*/;
+  --brass-light: #E0B85A /*#C4A84A*/;
+  /*
   --cream:       #F5EFE0;
   --parchment:   #EAE0C8;
   --tan:         #D4C8A8;
+   */
+  --cream:       #F4F7FA;        /* cooler, more technical white */
+  --parchment:   #E7EDF3;    /* steel-tinted light gray */
+  --tan:         #D7E0E8;          /* replaces wood tone with “equipment housing” feel */
   --fog:         #8FA8C0;
   --teak:        #7B4F2E;
   --text:        #2A3A4A;
   --muted:       #4a5a70;
   --white:       #ffffff;
+  --signal: #FF6A00;
   --wrap-max:    900px;
-  --font-display: 'Playfair Display', Georgia, serif;
+  /*--font-display: 'Playfair Display', Georgia, serif;*/
+  --font-display: 'Source Serif 4', Georgia, serif;
   --font-body:    'Source Serif 4', Georgia, serif;
   --font-mono:    'JetBrains Mono', 'Courier New', monospace;
 }
