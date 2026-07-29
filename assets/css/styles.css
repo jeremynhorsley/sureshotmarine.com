@@ -280,6 +280,87 @@ main p {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── DIAGNOSTIC CAPABILITIES TABLE ── */
+.diag-table-wrap {
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  border: 1px solid rgba(12,35,64,0.12);
+}
+.diag-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--cream);
+}
+.diag-table th {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream);
+  background: var(--navy);
+  text-align: left;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 3px solid var(--brass);
+}
+.diag-table td {
+  padding: 1rem 1.1rem;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(12,35,64,0.1);
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.diag-table tr:nth-child(even) td { background: var(--parchment); }
+.diag-table td.diag-sys {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.diag-table ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.diag-table li {
+  margin-bottom: 0.3rem;
+  font-size: 0.88rem;
+}
+.diag-table li:last-child { margin-bottom: 0; }
+
+@media (max-width: 720px) {
+  .diag-table thead { display: none; }
+  .diag-table, .diag-table tbody, .diag-table tr, .diag-table td {
+    display: block;
+    width: 100%;
+  }
+  .diag-table-wrap { border: none; overflow-x: visible; }
+  .diag-table tr {
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(12,35,64,0.15);
+  }
+  .diag-table td {
+    border-bottom: none;
+    padding: 0.85rem 1.1rem;
+  }
+  .diag-table td.diag-sys {
+    background: var(--navy);
+    color: var(--cream);
+    font-size: 1.05rem;
+    padding: 0.75rem 1.1rem;
+  }
+  .diag-table td:not(.diag-sys)::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin-bottom: 0.4rem;
+  }
+}
 .card {
   background: var(--cream);
   padding: 1.4rem 1.5rem 1.6rem;
