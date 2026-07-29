@@ -361,6 +361,24 @@ main p {
     margin-bottom: 0.4rem;
   }
 }
+
+/* ── DIAGNOSTIC INSTRUMENTATION TABLE (2-col variant) ── */
+.diag-table.diag-table--2col td.diag-sys {
+  width: 30%;
+}
+.diag-table.diag-table--2col ul {
+  columns: 2;
+  column-gap: 1.5rem;
+}
+.diag-table.diag-table--2col li {
+  break-inside: avoid;
+}
+
+@media (max-width: 720px) {
+  .diag-table.diag-table--2col ul {
+    columns: 1;
+  }
+}
 .card {
   background: var(--cream);
   padding: 1.4rem 1.5rem 1.6rem;
