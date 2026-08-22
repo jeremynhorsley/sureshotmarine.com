@@ -721,3 +721,13 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
   margin: 1.75rem 0 0.85rem;
 }
 .work-group-label:first-of-type { margin-top: 0; }
+
+.home-problems {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 720px) {
+  .home-problems {
+    grid-template-columns: 1fr;
+  }
+}
