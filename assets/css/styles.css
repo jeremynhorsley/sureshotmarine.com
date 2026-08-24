@@ -731,3 +731,26 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
     grid-template-columns: 1fr;
   }
 }
+/* ── DIAGNOSTICS MOBILE FIX ── */
+@media (max-width: 720px) {
+  .diag-table tr:nth-child(even) td.diag-sys,
+  .diag-table td.diag-sys {
+    width: 100%;
+    background: var(--navy);
+    color: var(--cream);
+    white-space: normal;
+  }
+
+  .diag-table.diag-table--2col td.diag-sys {
+    width: 100%;
+  }
+
+  .diag-table td:not(.diag-sys) {
+    width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .diag-table ul {
+    padding-left: 1.2rem;
+  }
+}
