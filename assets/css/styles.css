@@ -754,10 +754,30 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
     padding-left: 1.2rem;
   }
 }
-/* Fix Diagnostic Instrumentation table on mobile */
+/* ── DIAGNOSTIC INSTRUMENTATION — MOBILE FIX ── */
 @media (max-width: 720px) {
-  .diag-table.diag-table--2col td.diag-sys {
-    width: 100%;
+
+  .diag-table.diag-table--2col tr td.diag-sys {
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+    background: var(--navy) !important;
+    color: var(--cream) !important;
     white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .diag-table.diag-table--2col tr:nth-child(even) td.diag-sys {
+    background: var(--navy) !important;
+    color: var(--cream) !important;
+  }
+
+  .diag-table.diag-table--2col td:not(.diag-sys) {
+    display: block;
+    width: 100% !important;
+  }
+
+  .diag-table.diag-table--2col ul {
+    columns: 1;
   }
 }
