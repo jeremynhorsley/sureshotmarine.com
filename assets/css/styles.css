@@ -754,3 +754,10 @@ main section[data-color="navy"] .contact-value a:hover { color: var(--brass-ligh
     padding-left: 1.2rem;
   }
 }
+/* Fix Diagnostic Instrumentation table on mobile */
+@media (max-width: 720px) {
+  .diag-table.diag-table--2col td.diag-sys {
+    width: 100%;
+    white-space: normal;
+  }
+}
