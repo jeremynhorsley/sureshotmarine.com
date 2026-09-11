@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sure Shot Marine | Marine Electrical Diagnostics & Repair</title>
+<meta name="description" content="Marine electrical troubleshooting, repair, commissioning, and system evaluation for recreational and commercial vessels in the San Francisco Bay Area.">
+<style>
+:root{
+  --navy:#081b2d;
+  --navy2:#102a40;
+  --cream:#f4efe4;
+  --paper:#fbf8f1;
+  --tan:#ded2b8;
+  --gold:#c3a64b;
+  --red:#b31328;
+  --ink:#18222c;
+  --muted:#5d6670;
+  --line:#d7d0c2;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{
+  margin:0;
+  color:var(--ink);
+  background:#e7e3da;
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.55;
+}
+.site{
+  max-width:1180px;
+  margin:0 auto;
+  background:var(--paper);
+  box-shadow:0 0 34px rgba(0,0,0,.12);
+}
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+  padding:15px 34px;
+  background:var(--navy);
+  border-bottom:1px solid rgba(255,255,255,.13);
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:white;
+  min-width:max-content;
+}
+.mark{width:44px;height:44px;display:block}
+.brand-name{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:21px;
+  font-weight:bold;
+  line-height:1;
+}
+.brand-sub{
+  margin-top:6px;
+  color:#d7cfbc;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+nav{display:flex;gap:21px;align-items:center}
+nav a{
+  color:#f2ede3;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+nav a:hover{color:var(--gold)}
+section{padding:68px 7%}
+.hero{
+  min-height:570px;
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(circle at 80% 30%,rgba(196,168,74,.10),transparent 32%),
+    linear-gradient(125deg,var(--navy),var(--navy2));
+  color:white;
+}
+.hero-inner{max-width:800px}
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#d9d0bc;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--red)}
+h1{
+  margin:18px 0 20px;
+  max-width:780px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(44px,6.4vw,74px);
+  line-height:1.02;
+  letter-spacing:-.025em;
+}
+.hero p{
+  max-width:720px;
+  margin:0;
+  color:#eee8dc;
+  font-size:20px;
+  line-height:1.55;
+}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{
+  display:inline-block;
+  padding:12px 19px;
+  border:1px solid rgba(255,255,255,.42);
+  border-radius:4px;
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:bold;
+}
+.btn.primary{background:var(--red);border-color:var(--red)}
+.btn:hover{filter:brightness(1.08)}
+.location{margin-top:23px;color:#c8c2b5;font-size:12px}
+.section-head{
+  max-width:790px;
+  margin-bottom:30px;
+}
+h2{
+  margin:0 0 13px;
+  color:var(--navy);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:34px;
+  line-height:1.15;
+}
+.section-head p{margin:0;color:var(--muted);font-size:16px}
+.services{background:var(--paper)}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.service{
+  min-height:190px;
+  padding:25px;
+  background:var(--paper);
+}
+.service h3,.cap h3{
+  margin:0 0 9px;
+  color:var(--navy);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;
+}
+.service p,.cap p{margin:0;color:#4c555e;font-size:14px}
+.diagnostics{background:var(--navy);color:white}
+.diagnostics h2{color:white}
+.diagnostics .section-head p{color:#d7d0c2}
+.cap-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  margin-top:30px;
+}
+.cap{
+  padding:22px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.045);
+}
+.cap h3{color:#f5efe3}
+.cap p{color:#d9d3c7}
+.findings{background:var(--cream)}
+.findings-inner{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:55px;
+  align-items:start;
+}
+.findings p{margin-top:0;color:#4c555e}
+.findings ul{margin:18px 0 0;padding-left:20px}
+.findings li{margin:8px 0}
+.about{background:var(--paper)}
+.about-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:58px;
+  align-items:center;
+}
+.about p{color:#4c555e}
+.credential-list{
+  margin:24px 0 0;
+  padding:0;
+  list-style:none;
+  border-top:1px solid var(--line);
+}
+.credential-list li{
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+}
+.photo{
+  min-height:390px;
+  border-radius:4px;
+  background:
+    linear-gradient(rgba(8,27,45,.08),rgba(8,27,45,.08)),
+    linear-gradient(145deg,#d7cbb4,#aaa18e);
+  display:grid;
+  place-items:center;
+  padding:25px;
+  text-align:center;
+  color:#595348;
+  font-family:Georgia,"Times New Roman",serif;
+}
+.photo small{
+  display:block;
+  margin-top:8px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:11px;
+}
+.team-strip{
+  display:flex;
+  justify-content:space-between;
+  gap:35px;
+  padding:30px 7%;
+  background:var(--tan);
+  border-top:1px solid #c9bda5;
+  border-bottom:1px solid #c9bda5;
+}
+.team-strip div{max-width:500px}
+.team-strip strong{color:var(--navy)}
+.contact{
+  background:linear-gradient(125deg,var(--navy),var(--navy2));
+  color:white;
+}
+.contact h2{color:white}
+.contact p{max-width:680px;color:#ddd6ca}
+.contact .fine{margin-top:25px;color:#bdb7ac;font-size:12px}
+footer{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:24px 34px;
+  background:#04121e;
+  color:#aaa;
+  font-size:11px;
+}
+@media(max-width:850px){
+  header{position:relative;display:block;padding:15px 20px}
+  nav{margin-top:14px;gap:15px;overflow-x:auto;padding-bottom:4px}
+  nav a{white-space:nowrap}
+  section{padding:52px 6%}
+  .hero{min-height:500px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .cap-grid{grid-template-columns:1fr}
+  .findings-inner,.about-grid{grid-template-columns:1fr}
+  .team-strip{display:block}
+  .team-strip div+div{margin-top:18px}
+}
+@media(max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .hero{min-height:auto;padding-top:72px;padding-bottom:72px}
+  .hero p{font-size:17px}
+  h1{font-size:42px}
+  h2{font-size:29px}
+  .service{min-height:auto}
+  footer{display:block}
+  footer div+div{margin-top:5px}
+}
+</style>
+</head>
+<body>
+<div class="site">
+
+<header>
+  <a class="brand" href="#home">
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+      <rect x="1" y="1" width="38" height="38" rx="8" fill="#102a40"/>
+      <polygon points="20,3 24,17 20,20 16,17" fill="#F5EFE0"/>
+      <polygon points="20,37 24,23 20,20 16,23" fill="#F5EFE0"/>
+      <polygon points="3,20 17,24 20,20 17,16" fill="#F5EFE0"/>
+      <polygon points="37,20 23,24 20,20 23,16" fill="#B11226"/>
+    </svg>
+    <div>
+      <div class="brand-name">Sure Shot Marine</div>
+      <div class="brand-sub">ABYC Certified · Veteran Owned</div>
+    </div>
+  </a>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#diagnostics">Diagnostics</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="dot"></span>San Francisco Bay Area</div>
+    <h1>Marine Electrical Diagnostics &amp; Repair</h1>
+    <p>Troubleshooting, repair, commissioning, and system evaluation for recreational and commercial vessels.</p>
+    <div class="actions">
+      <a class="btn primary" href="sms:+15109301239">Text (510) 930-1239</a>
+      <a class="btn" href="tel:+15109301239">Call</a>
+    </div>
+    <div class="location">Alameda · Oakland · Berkeley · Richmond · Sausalito · San Francisco Bay Area</div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="section-head">
+    <h2>Marine Electrical Services</h2>
+    <p>AC and DC electrical troubleshooting, repair, system upgrades, and commissioning.</p>
+  </div>
+
+  <div class="grid">
+    <article class="service">
+      <h3>Battery &amp; Charging Systems</h3>
+      <p>Battery banks, alternators, regulators, shore chargers, DC-DC chargers, charging faults, and performance testing.</p>
+    </article>
+    <article class="service">
+      <h3>AC &amp; Shore Power</h3>
+      <p>Shore power, inlets, breakers, grounding, GFCI protection, transfer equipment, inverter/chargers, and AC distribution.</p>
+    </article>
+    <article class="service">
+      <h3>DC Electrical Systems</h3>
+      <p>Distribution panels, busbars, circuit protection, switching, wiring faults, voltage drop, and critical circuits.</p>
+    </article>
+    <article class="service">
+      <h3>Lithium Systems</h3>
+      <p>LiFePO4 conversions, BMS integration, charging compatibility, alternator protection, and commissioning.</p>
+    </article>
+    <article class="service">
+      <h3>Navigation &amp; Communications</h3>
+      <p>NMEA 2000, VHF, AIS, GPS, antenna systems, network faults, and equipment integration.</p>
+    </article>
+    <article class="service">
+      <h3>Corrosion &amp; Stray Current</h3>
+      <p>Bonding systems, galvanic protection, hull-potential testing, stray-current investigation, and abnormal anode loss.</p>
+    </article>
+  </div>
+</section>
+
+<section class="diagnostics" id="diagnostics">
+  <div class="section-head">
+    <h2>Electrical Diagnostics</h2>
+    <p>Electrical faults are tested under operating conditions to identify the source of the problem before equipment is repaired or replaced.</p>
+  </div>
+
+  <div class="cap-grid">
+    <article class="cap">
+      <h3>Electrical Testing</h3>
+      <p>AC and DC voltage, current, voltage drop, contact resistance, conductor resistance, leakage current, and parasitic loads.</p>
+    </article>
+    <article class="cap">
+      <h3>Thermal Imaging</h3>
+      <p>Thermal evaluation of connections, breakers, conductors, charging equipment, shore-power components, and distribution systems.</p>
+    </article>
+    <article class="cap">
+      <h3>Battery &amp; Power Analysis</h3>
+      <p>Battery and charging-system testing, AC power quality, generator output, inverter performance, and load response.</p>
+    </article>
+    <article class="cap">
+      <h3>Networks &amp; Communications</h3>
+      <p>NMEA 2000 and CAN Bus diagnostics, VHF antenna testing, feedline evaluation, SWR, and RF performance.</p>
+    </article>
+    <article class="cap">
+      <h3>Corrosion Testing</h3>
+      <p>Hull potential, bonding systems, galvanic conditions, stray-current investigation, and galvanic-isolator performance.</p>
+    </article>
+    <article class="cap">
+      <h3>System Verification</h3>
+      <p>Testing under actual operating conditions to verify system performance and confirm corrective work.</p>
+    </article>
+  </div>
+</section>
+
+<section class="findings">
+  <div class="findings-inner">
+    <div>
+      <h2>Documentation &amp; Findings</h2>
+    </div>
+    <div>
+      <p>Findings can be documented when required for repair planning, system upgrades, maintenance records, surveys, insurance-related work, or future service.</p>
+      <ul>
+        <li>Measured electrical values</li>
+        <li>Photographs and thermal images</li>
+        <li>Observed deficiencies</li>
+        <li>Recommended corrective actions</li>
+        <li>System mapping and circuit documentation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-grid">
+    <div>
+      <h2>About Sure Shot Marine</h2>
+      <p><strong>Jeremyn Horsley — Owner &amp; Lead Marine Electrician</strong></p>
+      <p>Sure Shot Marine is an owner-led marine electrical business serving recreational and commercial vessels throughout the San Francisco Bay Area.</p>
+      <p>Jeremyn is an ABYC Certified Marine Electrician and electrical engineer. His background includes industrial electrical power and commissioning, Navy aviation electronics, and Coast Guard navigation, communications, and electronic systems.</p>
+
+      <ul class="credential-list">
+        <li><strong>ABYC Certified Marine Electrician</strong></li>
+        <li>B.S. Electrical Engineering — San Francisco State University</li>
+        <li>U.S. Coast Guard — Electronics Technician</li>
+        <li>U.S. Navy — Avionics Technician</li>
+      </ul>
+    </div>
+    <div class="photo">
+      Jeremyn Horsley
+      <small>Your existing sailing photo goes here.</small>
+    </div>
+  </div>
+</section>
+
+<div class="team-strip">
+  <div><strong>Owner Led</strong><br>Customers work directly with the people performing the work.</div>
+  <div><strong>Additional Support</strong><br>Jeremyn works alongside Ryan Thurm, a longtime friend and former Coast Guard shipmate, when project scope requires additional support.</div>
+</div>
+
+<section class="contact" id="contact">
+  <h2>Request Service</h2>
+  <p>Call or text to discuss the problem and schedule service. Photos and a brief description of the issue are helpful when available.</p>
+  <div class="actions">
+    <a class="btn primary" href="sms:+15109301239">Text (510) 930-1239</a>
+    <a class="btn" href="tel:+15109301239">Call</a>
+    <a class="btn" href="mailto:jeremyn@sureshotmarine.com">Email</a>
+  </div>
+  <div class="fine">Serving Alameda and the San Francisco Bay Area.</div>
+</section>
+</main>
+
+<footer>
+  <div>© <span id="year"></span> Sure Shot Marine LLC</div>
+  <div>ABYC Certified · Insured · Veteran Owned</div>
+  <div>San Francisco Bay Area</div>
+</footer>
+</div>
+
+<script>
+document.getElementById("year").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
